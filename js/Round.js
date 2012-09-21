@@ -1,6 +1,7 @@
-function Round(name, tricks) {
+function Round(name, tricks, players) {
     this.name = name;
     this.tricks = tricks;
+    this.dealer = players[0];
 }
 
 Round.prototype.getName = function() {
@@ -9,4 +10,8 @@ Round.prototype.getName = function() {
 
 Round.prototype.getTricks = function() {
     return this.tricks;
+};
+
+Round.prototype.getDealer = function() {
+    return this.dealer;
 };

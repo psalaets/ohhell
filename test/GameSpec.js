@@ -27,5 +27,21 @@ describe("Game", function() {
             expect(rounds[3].getTricks()).toEqual(2);
             expect(rounds[4].getTricks()).toEqual(1);
         });
+
+
+        it("should rotate players as dealer", function() {
+            var game = new Game(['abe', 'ben', 'cal']);
+            game.start(4);
+
+            var rounds = game.getRounds();
+
+            expect(rounds[0].getDealer()).toEqual('abe');
+            expect(rounds[1].getDealer()).toEqual('ben');
+            expect(rounds[2].getDealer()).toEqual('cal');
+            expect(rounds[3].getDealer()).toEqual('abe');
+            expect(rounds[4].getDealer()).toEqual('ben');
+            expect(rounds[5].getDealer()).toEqual('cal');
+            expect(rounds[6].getDealer()).toEqual('abe');
+        });
     });
 });
