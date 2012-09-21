@@ -1,9 +1,11 @@
-function Game(highRound) {
+function Game(players) {
     this.rounds = [];
-    this.createRounds(highRound);
-
-    this.players = [];
+    this.players = players;
 }
+
+Game.prototype.start = function(highRound) {
+    this.createRounds(highRound);
+};
 
 Game.prototype.createRounds = function(highRound) {
     //Ascending rounds
@@ -18,10 +20,6 @@ Game.prototype.createRounds = function(highRound) {
     for(var i = highRound - 1; i > 0; i--) {
         this.rounds.push(new Round("Round " + i, i));
     }
-};
-
-Game.prototype.addPlayer = function(player) {
-    this.players.push(player);
 };
 
 Game.prototype.getPlayers = function() {
