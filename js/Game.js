@@ -8,15 +8,15 @@ function Game(highRound) {
 Game.prototype.createRounds = function(highRound) {
     //Ascending rounds
     for(var i = 1; i < highRound; i++) {
-        this.rounds.push(new Round("Round " + i));
+        this.rounds.push(new Round("Round " + i, i));
     }
 
     //High round
-    this.rounds.push(new Round("Round " + highRound));
+    this.rounds.push(new Round("Round " + highRound, highRound));
 
     //Descending rounds
     for(var i = highRound - 1; i > 0; i--) {
-        this.rounds.push(new Round("Round " + i));
+        this.rounds.push(new Round("Round " + i, i));
     }
 };
 
