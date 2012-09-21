@@ -28,7 +28,6 @@ describe("Game", function() {
             expect(rounds[4].getTricks()).toEqual(1);
         });
 
-
         it("should rotate players as dealer", function() {
             var game = new Game(['abe', 'ben', 'cal']);
             game.start(4);
