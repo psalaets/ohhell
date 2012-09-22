@@ -116,5 +116,17 @@ describe("Game", function() {
             expect(game.getRound("1 (down)")).toBe(rounds[4]);
             expect(game.getRound("blah")).toBeNull();
         });
+
+        it("can get all of a player's scores", function() {
+            var game = new Game(['bob', 'joe']);
+            game.start(3);
+
+            var joesScores = game.getScores("joe");
+
+            expect(joesScores.length).toEqual(5);
+            joesScores.forEach(function(score) {
+                expect(score.getPlayer() === "joe");
+            });
+        });
     });
 });

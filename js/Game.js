@@ -58,5 +58,10 @@ Game.prototype = {
         return this.rounds.every(function(round) {
             return round.isReported();
         });
+    },
+    getScores: function(player) {
+        return this.rounds.map(function(round) {
+            return round.getScore(player);
+        });
     }
 };
