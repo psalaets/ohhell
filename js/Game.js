@@ -49,3 +49,9 @@ Game.prototype.getPlayers = function() {
 Game.prototype.getRounds = function() {
     return this.rounds;
 };
+
+Game.prototype.getCurrentRound = function() {
+    return this.rounds.filter(function(round) {
+        return !round.isReported();
+    })[0] || null;
+};

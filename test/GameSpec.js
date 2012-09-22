@@ -42,5 +42,37 @@ describe("Game", function() {
             expect(rounds[5].getDealer()).toEqual('cal');
             expect(rounds[6].getDealer()).toEqual('abe');
         });
+
+        it("considers current round to be earliest round that is not reported", function() {
+            var game = new Game(['abe', 'ben']);
+            game.start(2);
+
+            var rounds = game.getRounds();
+
+            //play first round
+            rounds[0].getScores().forEach(function(score) {
+                score.setBid(1);
+                score.madeBid();
+            });
+
+            expect(game.getCurrentRound()).toBe(rounds[1]);
+        });
+
+        it("returns null for current round if all rounds are reported", function() {
+            var game = new Game(['abe', 'ben']);
+            game.start(2);
+
+            var rounds = game.getRounds();
+
+            //play all rounds
+            rounds.forEach(function(round) {
+                round.getScores().forEach(function(score) {
+                    score.setBid(1);
+                    score.madeBid();
+                });
+            });
+
+            expect(game.getCurrentRound()).toBeNull();
+        });
     });
 });
