@@ -34,11 +34,11 @@ describe("Game", function() {
 
             var rounds = game.getRounds();
 
-            expect(rounds[0].getName()).toEqual("1 (up)");
-            expect(rounds[1].getName()).toEqual("2 (up)");
+            expect(rounds[0].getName()).toEqual("+1");
+            expect(rounds[1].getName()).toEqual("+2");
             expect(rounds[2].getName()).toEqual("3");
-            expect(rounds[3].getName()).toEqual("2 (down)");
-            expect(rounds[4].getName()).toEqual("1 (down)");
+            expect(rounds[3].getName()).toEqual("-2");
+            expect(rounds[4].getName()).toEqual("-1");
         });
 
         it("rotates players as dealer", function() {
@@ -111,9 +111,9 @@ describe("Game", function() {
 
             var rounds = game.getRounds();
 
-            expect(game.getRound("1 (up)")).toBe(rounds[0]);
+            expect(game.getRound("+1")).toBe(rounds[0]);
             expect(game.getRound("3")).toBe(rounds[2]);
-            expect(game.getRound("1 (down)")).toBe(rounds[4]);
+            expect(game.getRound("-1")).toBe(rounds[4]);
             expect(game.getRound("blah")).toBeNull();
         });
 
