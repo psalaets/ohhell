@@ -8,30 +8,27 @@ function Round(name, maxTricks, players) {
     });
 }
 
-Round.prototype.getName = function() {
-    return this.name;
-};
-
-Round.prototype.getMaxTricks = function() {
-    return this.maxTricks;
-};
-
-Round.prototype.getDealer = function() {
-    return this.dealer;
-};
-
-Round.prototype.getScores = function() {
-    return this.scores;
-};
-
-Round.prototype.getScore = function(player) {
-    return this.scores.filter(function(score) {
-        return score.getPlayer() === player;
-    })[0] || null;
-};
-
-Round.prototype.isReported = function() {
-    return this.scores.every(function(score) {
-        return score.isReported();
-    });
+Round.prototype = {
+    getName: function() {
+        return this.name;
+    },
+    getMaxTricks: function() {
+        return this.maxTricks;
+    },
+    getDealer: function() {
+        return this.dealer;
+    },
+    getScores: function() {
+        return this.scores;
+    },
+    getScore: function(player) {
+        return this.scores.filter(function(score) {
+            return score.getPlayer() === player;
+        })[0] || null;
+    },
+    isReported: function() {
+        return this.scores.every(function(score) {
+            return score.isReported();
+        });
+    }
 };
