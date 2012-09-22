@@ -28,6 +28,35 @@ describe("Game", function() {
             expect(rounds[4].getMaxTricks()).toEqual(1);
         });
 
+        it("names ascending rounds like <max tricks>-up", function() {
+            var game = new Game(['bob']);
+            game.start(3);
+
+            var rounds = game.getRounds();
+
+            expect(rounds[0].getName()).toEqual("1-up");
+            expect(rounds[1].getName()).toEqual("2-up");
+        });
+
+        it("names high round like <max tricks>", function() {
+            var game = new Game(['bob']);
+            game.start(3);
+
+            var rounds = game.getRounds();
+
+            expect(rounds[2].getName()).toEqual("3");
+        });
+
+        it("names descending rounds like <max tricks>-down", function() {
+            var game = new Game(['bob']);
+            game.start(3);
+
+            var rounds = game.getRounds();
+
+            expect(rounds[3].getName()).toEqual("2-down");
+            expect(rounds[4].getName()).toEqual("1-down");
+        });
+
         it("rotates players as dealer", function() {
             var game = new Game(['abe', 'ben', 'cal']);
             game.start(4);

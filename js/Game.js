@@ -27,15 +27,15 @@ Game.prototype = {
     },
     createAscendingRounds: function(highRound, players) {
         for(var i = 1; i < highRound; i++) {
-            this.rounds.push(new Round("Round " + i, i, players.rotate()));
+            this.rounds.push(new Round(i + "-up", i, players.rotate()));
         }
     },
     createHighRound: function(highRound, players) {
-        this.rounds.push(new Round("Round " + highRound, highRound, players.rotate()));
+        this.rounds.push(new Round(highRound.toString(), highRound, players.rotate()));
     },
     createDescendingRounds: function(highRound, players) {
         for(var i = highRound - 1; i > 0; i--) {
-            this.rounds.push(new Round("Round " + i, i, players.rotate()));
+            this.rounds.push(new Round(i + "-down", i, players.rotate()));
         }
     },
     getPlayers: function() {
