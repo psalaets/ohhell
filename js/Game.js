@@ -27,7 +27,7 @@ Game.prototype = {
     },
     createAscendingRounds: function(highRound, players) {
         for(var i = 1; i < highRound; i++) {
-            this.rounds.push(new Round(i + "-up", i, players.rotate()));
+            this.rounds.push(new Round(i + " (up)", i, players.rotate()));
         }
     },
     createHighRound: function(highRound, players) {
@@ -35,7 +35,7 @@ Game.prototype = {
     },
     createDescendingRounds: function(highRound, players) {
         for(var i = highRound - 1; i > 0; i--) {
-            this.rounds.push(new Round(i + "-down", i, players.rotate()));
+            this.rounds.push(new Round(i + " (down)", i, players.rotate()));
         }
     },
     getPlayers: function() {
