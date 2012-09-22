@@ -15,5 +15,28 @@ describe("Round", function() {
         var r = new Round("round", 3, ['bob', 'joe']);
 
         expect(r.getDealer()).toEqual('bob');
-    })
+    });
+
+    it("should have a score for each player", function() {
+        var r = new Round("round", 3, ['bob', 'joe']);
+
+        var scores = r.getScores();
+
+        expect(scores[0].getPlayer()).toEqual('bob');
+        expect(scores[1].getPlayer()).toEqual('joe');
+    });
+
+    it("is reported once made/missed is known for all scores", function() {
+        var r = new Round("round", 3, ['bob', 'joe']);
+
+        var scores = r.getScores();
+
+        scores[0].madeBid();
+
+        expect(r.isReported()).toEqual(false);
+
+        scores[1].missedBid();
+
+        expect(r.isReported()).toEqual(true);
+    });
 });

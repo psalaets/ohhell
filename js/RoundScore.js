@@ -1,8 +1,8 @@
 function RoundScore(player) {
     this.player = player;
+    this.bid = 0;
     //Not set to anything until we get an answer
     this.gotBid = null;
-    this.bid = null;
 }
 
 RoundScore.prototype.getPlayer = function() {
@@ -26,8 +26,12 @@ RoundScore.prototype.missedBid = function() {
 };
 
 RoundScore.prototype.getPoints = function() {
-    if(this.bid !== null && this.gotBid !== null) {
+    if(this.isReported()) {
         return (10 + this.bid) * (this.gotBid ? 1 : -1);
     }
     return null;
+};
+
+RoundScore.prototype.isReported = function() {
+    return this.gotBid !== null;
 };

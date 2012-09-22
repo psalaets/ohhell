@@ -5,14 +5,23 @@ describe("RoundScore", function() {
         expect(r.getPlayer()).toEqual('bob');
     });
 
-    it("should not have a score if bid is unknown", function() {
+    it("should default bid to 0", function() {
         var r = new RoundScore('bob');
-        r.madeBid();
 
-        expect(r.getPoints()).toBeNull();
+        expect(r.getBid()).toEqual(0);
     });
 
-    it("should not have a score if made/missed is unknown", function() {
+    it("is reported once made/missed is known", function() {
+        var r = new RoundScore('bob');
+
+        expect(r.isReported()).toBe(false);
+
+        r.missedBid();
+
+        expect(r.isReported()).toBe(true);
+    });
+
+    it("should not have points if not reported", function() {
         var r = new RoundScore('bob');
         r.setBid(2);
 
