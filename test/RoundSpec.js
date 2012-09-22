@@ -5,10 +5,10 @@ describe("Round", function() {
         expect(r.getName()).toEqual("round 1");
     });
 
-    it("knows number of tricks", function() {
+    it("knows max number of tricks", function() {
         var r = new Round("round", 4, ['bob', 'joe']);
 
-        expect(r.getTricks()).toEqual(4);
+        expect(r.getMaxTricks()).toEqual(4);
     });
 
     it("makes first player the dealer", function() {

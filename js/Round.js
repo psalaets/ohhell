@@ -1,6 +1,6 @@
-function Round(name, tricks, players) {
+function Round(name, maxTricks, players) {
     this.name = name;
-    this.tricks = tricks;
+    this.maxTricks = maxTricks;
     this.dealer = players[0];
 
     this.scores = players.map(function(player) {
@@ -12,8 +12,8 @@ Round.prototype.getName = function() {
     return this.name;
 };
 
-Round.prototype.getTricks = function() {
-    return this.tricks;
+Round.prototype.getMaxTricks = function() {
+    return this.maxTricks;
 };
 
 Round.prototype.getDealer = function() {

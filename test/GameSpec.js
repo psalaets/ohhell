@@ -15,17 +15,17 @@ describe("Game", function() {
             expect(game.getRounds().length).toEqual(15);
         });
 
-        it("creates rounds with correct number of tricks", function() {
+        it("creates rounds with correct number of max tricks", function() {
             var game = new Game(['bob']);
             game.start(3);
 
             var rounds = game.getRounds();
 
-            expect(rounds[0].getTricks()).toEqual(1);
-            expect(rounds[1].getTricks()).toEqual(2);
-            expect(rounds[2].getTricks()).toEqual(3);
-            expect(rounds[3].getTricks()).toEqual(2);
-            expect(rounds[4].getTricks()).toEqual(1);
+            expect(rounds[0].getMaxTricks()).toEqual(1);
+            expect(rounds[1].getMaxTricks()).toEqual(2);
+            expect(rounds[2].getMaxTricks()).toEqual(3);
+            expect(rounds[3].getMaxTricks()).toEqual(2);
+            expect(rounds[4].getMaxTricks()).toEqual(1);
         });
 
         it("rotates players as dealer", function() {
