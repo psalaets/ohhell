@@ -74,5 +74,22 @@ describe("Game", function() {
 
             expect(game.getCurrentRound()).toBeNull();
         });
+
+        it("is finished once all rounds are reported", function() {
+            var game = new Game(['abe', 'ben']);
+            game.start(2);
+
+            var rounds = game.getRounds();
+
+            //play all rounds
+            rounds.forEach(function(round) {
+                round.getScores().forEach(function(score) {
+                    score.setBid(1);
+                    score.madeBid();
+                });
+            });
+
+            expect(game.isFinished()).toEqual(true);
+        });
     });
 });

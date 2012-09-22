@@ -55,3 +55,9 @@ Game.prototype.getCurrentRound = function() {
         return !round.isReported();
     })[0] || null;
 };
+
+Game.prototype.isFinished = function() {
+    return this.rounds.every(function(round) {
+        return round.isReported();
+    });
+};
