@@ -25,6 +25,15 @@ Round.prototype.getScores = function() {
     return this.scores;
 };
 
+Round.prototype.getScore = function(player) {
+    for(var i = 0; i < this.scores.length; i++) {
+        if(this.scores[i].getPlayer() === player) {
+            return this.scores[i];
+        }
+    }
+    return null;
+};
+
 Round.prototype.isReported = function() {
     for(var i = 0; i < this.scores.length; i++) {
         if(!this.scores[i].isReported()) {

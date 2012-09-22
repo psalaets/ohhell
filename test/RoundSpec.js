@@ -39,4 +39,18 @@ describe("Round", function() {
 
         expect(r.isReported()).toEqual(true);
     });
+
+    it("can return score for given player", function() {
+        var r = new Round("round", 3, ['bob', 'joe']);
+
+        var score = r.getScore('joe');
+
+        expect(score.getPlayer()).toEqual('joe');
+    });
+
+    it("returns null when finding score for unknown player", function() {
+        var r = new Round("round", 3, ['bob', 'joe']);
+
+        expect(r.getScore('tommy')).toBeNull();
+    });
 });
