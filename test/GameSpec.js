@@ -104,5 +104,17 @@ describe("Game", function() {
 
             expect(game.isFinished()).toEqual(true);
         });
+
+        it("can get round by name", function() {
+            var game = new Game(['bob']);
+            game.start(3);
+
+            var rounds = game.getRounds();
+
+            expect(game.getRound("1 (up)")).toBe(rounds[0]);
+            expect(game.getRound("3")).toBe(rounds[2]);
+            expect(game.getRound("1 (down)")).toBe(rounds[4]);
+            expect(game.getRound("blah")).toBeNull();
+        });
     });
 });

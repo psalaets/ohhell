@@ -44,6 +44,11 @@ Game.prototype = {
     getRounds: function() {
        return this.rounds;
     },
+    getRound: function(name) {
+        return this.rounds.filter(function(round) {
+            return round.getName() === name;
+        })[0] || null;
+    },
     getCurrentRound: function() {
         return this.rounds.filter(function(round) {
             return !round.isReported();
