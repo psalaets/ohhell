@@ -1,11 +1,11 @@
 describe("RoundScore", function() {
-    it("should take player on creation", function() {
+    it("takes player name on creation", function() {
         var r = new RoundScore('bob');
 
         expect(r.getPlayer()).toEqual('bob');
     });
 
-    it("should default bid to 0", function() {
+    it("defaults bid to 0", function() {
         var r = new RoundScore('bob');
 
         expect(r.getBid()).toEqual(0);
@@ -21,15 +21,16 @@ describe("RoundScore", function() {
         expect(r.isReported()).toBe(true);
     });
 
-    it("should not have points if not reported", function() {
+    it("doesn't have points until result is reported", function() {
         var r = new RoundScore('bob');
         r.setBid(2);
 
+        expect(r.isReported()).toBe(false);
         expect(r.getPoints()).toBeNull();
     });
 
     describe("made bid", function() {
-        it("should have <bid> + 10 points", function() {
+        it("has <bid> + 10 points", function() {
             var r = new RoundScore('bob');
             r.setBid(2);
             r.madeBid();
@@ -39,7 +40,7 @@ describe("RoundScore", function() {
     });
 
     describe("missed bid", function() {
-        it("should have negative (<bid> + 10) points", function() {
+        it("has negative (<bid> + 10) points", function() {
             var r = new RoundScore('bob');
             r.setBid(2);
             r.missedBid();

@@ -1,23 +1,23 @@
 describe("Round", function() {
-    it("should be named on creation", function() {
+    it("is named on creation", function() {
         var r = new Round("round 1", 1, ['bob', 'joe']);
 
         expect(r.getName()).toEqual("round 1");
     });
 
-    it("should have a number of tricks", function() {
+    it("knows number of tricks", function() {
         var r = new Round("round", 4, ['bob', 'joe']);
 
         expect(r.getTricks()).toEqual(4);
     });
 
-    it("should make first player the dealer", function() {
+    it("makes first player the dealer", function() {
         var r = new Round("round", 3, ['bob', 'joe']);
 
         expect(r.getDealer()).toEqual('bob');
     });
 
-    it("should have a score for each player", function() {
+    it("has a score for each player", function() {
         var r = new Round("round", 3, ['bob', 'joe']);
 
         var scores = r.getScores();
