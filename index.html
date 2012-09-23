@@ -25,7 +25,7 @@
             <div class="hero-unit">
                 <h1>Oh Hell</h1>
                 <p>Scorekeeper for a variation of <a href="http://en.wikipedia.org/wiki/Oh,_hell">Oh Hell</a></p>
-                <p><a class="btn btn-primary btn-large" ng-click="setup()">New Game</a></p>
+                <p><input class="btn btn-primary btn-large" type="button" ng-click="setup()" value="New Game"/></p>
             </div>
         </script>
 
@@ -38,7 +38,7 @@
                 <select ng-model="maxRound" ng-options="i.toString() for i in [1, 2, 3, 4, 5, 6, 7, 8]" class="span1"></select>
             </form>
 
-            <a class="btn btn-success" ng-click="startGame()">Start Game</a>
+            <input class="btn btn-success" type="button" ng-click="startGame()" value="Start Game"/>
         </script>
 
         <script type="text/ng-template" id="round.html">
