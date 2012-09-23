@@ -8,18 +8,28 @@ MIT license
 
 # Rules
 
-Starting at one, one more card is dealt on each round than the previous round.  After the eight round, cards dealt per round decreases by one.
+## Decks
+
+Use one or two decks.  If using two decks designate one as "better" for breaking ties.
+
+## Dealing
+
+The player on the dealer's left is the next round's dealer.
+
+Starting at one, one more card on each round than the previous round.  After the eight round, cards dealt per round decreases by one.
 
 Card dealt per round:
-1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3, 2, 1
+1, 2, 3, ... 7, 8, 7, ... 3, 2, 1
 
-Each player bids on how many tricks they will take
+## Round Play
+
+1. Starting with the dealer, player bid on how many tricks they will take
+2. The dealer plays the first card (winner of each trick plays the first card on the next trick)
+3. Remaining players must play a card of that suit if they have one.  They can play anything if they can't follow suit.
 
 ## Trick Taking
 
-- Whoever went first plays a card which sets the suit
-- Remaining players must play a card of that suit if they have one.  They can play anything if they can't follow suit.
-- Whoever has the best card takes the trick
+Player with highest ranking card takes the trick
 
 ### Card Ranking
 
@@ -34,4 +44,4 @@ Each player bids on how many tricks they will take
 
 ## End of Game
 
-Whoever has the most points after all rounds have been played is the winner
+Player with most points after all rounds have been played is the winner
