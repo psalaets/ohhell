@@ -23,6 +23,10 @@ function RoundController($scope, $routeParams, gameService) {
         $scope.round = gameService.currentGame.getRound(roundName);
     }
 
+    $scope.nextRound = function() {
+        $scope.round = gameService.currentGame.getCurrentRound();
+    };
+
     //Helper for populating bid select
     $scope.zeroTo = function(max) {
         var values = [];
