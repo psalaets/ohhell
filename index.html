@@ -42,29 +42,31 @@
         </script>
 
         <script type="text/ng-template" id="round.html">
-            <h1>Round {{round.getName()}}</h1>
+            <div class="span6">
+                <h1>Round {{round.getName()}}</h1>
 
-            <table class="table">
-                <tr>
-                    <th>Player</th>
-                    <th>Bid</th>
-                    <th></th>
-                    <th>Points</th>
-                </tr>
-                <tr ng-repeat="score in round.getScores()">
-                    <td>{{score.getPlayer()}}</td>
-                    <td>
-                        <select ng-model="score.bid" ng-options="i.toString() for i in 0 | upto:round.getMaxTricks()" class="span1"></select>
-                    </td>
-                    <td>
-                        <input class="btn btn-success" type="button" value="Got It" ng-click="score.madeBid()"/>
-                        <input class="btn btn-danger" type="button" value="Missed It" ng-click="score.missedBid()"/>
-                    </td>
-                    <td ng-class="{success: score.gotBid == true, error: score.gotBid == false}">{{score.getPoints() | sign}}</td>
-                </tr>
-            </table>
+                <table class="table">
+                    <tr>
+                        <th>Player</th>
+                        <th>Bid</th>
+                        <th></th>
+                        <th>Points</th>
+                    </tr>
+                    <tr ng-repeat="score in round.getScores()">
+                        <td>{{score.getPlayer()}}</td>
+                        <td>
+                            <select ng-model="score.bid" ng-options="i.toString() for i in 0 | upto:round.getMaxTricks()" class="span1"></select>
+                        </td>
+                        <td>
+                            <input class="btn btn-success" type="button" value="Got It" ng-click="score.madeBid()"/>
+                            <input class="btn btn-danger" type="button" value="Missed It" ng-click="score.missedBid()"/>
+                        </td>
+                        <td ng-class="{success: score.gotBid == true, error: score.gotBid == false}">{{score.getPoints() | sign}}</td>
+                    </tr>
+                </table>
 
-            <input class="btn" type="button" value="Round Finished" ng-click="roundFinished()"/>
+                <input class="btn" type="button" value="Round Finished" ng-click="roundFinished()"/>
+            </div>
         </script>
 
         <script type="text/ng-template" id="scoreboard.html">
