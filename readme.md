@@ -4,6 +4,8 @@ This is a scorekeeper for a variation of Oh Hell.
 
 More background info at [http://en.wikipedia.org/wiki/Oh,_hell](http://en.wikipedia.org/wiki/Oh,_hell)
 
+MIT license
+
 # Rules
 
 Starting at one, one more card is dealt on each round than the previous round.  After the eight round, cards dealt per round decreases by one.
