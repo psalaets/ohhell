@@ -24,12 +24,8 @@ angular.module("ohhell.service", []).
                     scores: game.getScores(player)
                 };
 
-                stat.total = stat.scores.reduce(function(total, score) {
-                    if(score.isReported()) {
-                        return total + score.getPoints();
-                    }
-                    return total;
-                }, 0);
+                this.total(stat);
+                this.streak(stat);
 
                 return stat;
             },
@@ -50,6 +46,44 @@ angular.module("ohhell.service", []).
                         stat.rank = index + 1;
                     }
                 });
+            },
+            //assumes stat has scores
+            total: function(stat) {
+                stat.total = stat.scores.reduce(function(total, score) {
+                    if(score.isReported()) {
+                        return total + score.getPoints();
+                    }
+                    return total;
+                }, 0);
+            },
+            //assumes stat has scores
+            streak: function(stat) {
+                //get results of reported scores
+                var roundResults = [];
+                stat.scores.forEach(function(score) {
+                    if(score.isReported()) {
+                        roundResults.push(score.gotBid);
+                    }
+                });
+
+                //go backwards over them and count until made/missed changes
+                roundResults.reverse();
+
+                var mostRecentResult = null;
+                var count = 0;
+
+                for(var i = 0; i < roundResults.length; i++) {
+                    if(mostRecentResult === null) {
+                        mostRecentResult = roundResults[i];
+                        count++;
+                    } else if(mostRecentResult === roundResults[i]) {
+                        count++;
+                    } else {
+                        break;
+                    }
+                }
+
+                stat.streak = (mostRecentResult ? "Got " : "Missed ") + count;
             }
         };
     });
