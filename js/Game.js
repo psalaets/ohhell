@@ -1,12 +1,11 @@
-function Game(players) {
-    this.rounds = [];
+function Game(players, highRound) {
     this.players = players;
+
+    this.rounds = [];
+    this.createRounds(highRound);
 }
 
 Game.prototype = {
-    start: function(highRound) {
-        this.createRounds(highRound);
-    },
     createRounds: function(highRound) {
         //Rotatable copy of players array
         var players = this.players.slice(0);
