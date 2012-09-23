@@ -20,6 +20,7 @@
 
         <script type="text/ng-template" id="landing.html">
             <h1>Oh Hell</h1>
+
             <input type="button" value="New Game" ng-click="setup()"/>
         </script>
 
@@ -39,6 +40,7 @@
 
         <script type="text/ng-template" id="round.html">
             <h1>Round {{round.getName()}}</h1>
+
             <table>
                 <tr>
                     <th>Player</th>
@@ -59,7 +61,28 @@
                 </tr>
             </table>
 
-            <input type="button" value="Next Round" ng-click="nextRound()"/>
+            <input type="button" value="Round Finished" ng-click="roundFinished()"/>
+        </script>
+
+        <script type="text/ng-template" id="summary.html">
+            <h1>Game Summary</h1>
+
+            <table>
+                <tr>
+                    <th></th>
+                    <th ng-repeat="round in game.getRounds()">
+                        {{round.getName()}}
+                    </th>
+                </tr>
+                <tr ng-repeat="player in game.getPlayers()">
+                    <td>{{player}}</td>
+                    <td ng-repeat="score in game.getScores(player)">
+                        <span ng-show="score.isReported()">{{score.getBid()}}</span>
+                    </td>
+                </tr>
+            </table>
+
+            <input type="button" value="Next Round" ng-show="hasNextRound()" ng-click="nextRound()"/>
         </script>
     </body>
 </html>

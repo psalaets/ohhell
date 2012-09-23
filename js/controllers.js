@@ -11,20 +11,16 @@ function SetupController($scope, $location, gameService) {
     $scope.startGame = function() {
         gameService.startNewGame($scope.players, $scope.maxRound);
 
-        $location.path("/ohhell/round/current");
+        $location.path("/ohhell/round/+1");
     };
 }
 
-function RoundController($scope, $routeParams, gameService) {
+function RoundController($scope, $routeParams, $location, gameService) {
     var roundName = $routeParams.round;
-    if(roundName === "current") {
-        $scope.round = gameService.currentGame.getCurrentRound();
-    } else {
-        $scope.round = gameService.currentGame.getRound(roundName);
-    }
+    $scope.round = gameService.currentGame.getRound(roundName);
 
-    $scope.nextRound = function() {
-        $scope.round = gameService.currentGame.getCurrentRound();
+    $scope.roundFinished = function() {
+        $location.path("/ohhell/summary");
     };
 
     //Helper for populating bid select
@@ -35,4 +31,20 @@ function RoundController($scope, $routeParams, gameService) {
         }
         return values;
     };
+}
+
+function SummaryController($scope, $location, gameService) {
+    var game = gameService.currentGame;
+
+    $scope.game = game;
+
+    $scope.hasNextRound = function() {
+        return !!game.getCurrentRound();
+    };
+
+    $scope.nextRound = function() {
+        var currentRound = game.getCurrentRound();
+        $location.path("/ohhell/round/" + currentRound.getName());
+    };
+
 }
