@@ -20,11 +20,11 @@ function RoundController($scope, $routeParams, $location, gameService) {
     $scope.round = gameService.currentGame.getRound(roundName);
 
     $scope.roundFinished = function() {
-        $location.path("/ohhell/summary");
+        $location.path("/ohhell/scoreboard");
     };
 }
 
-function SummaryController($scope, $location, gameService, summaryService) {
+function ScoreboardController($scope, $location, gameService, summaryService) {
     var game = gameService.currentGame;
 
     $scope.rounds = game.getRounds();
