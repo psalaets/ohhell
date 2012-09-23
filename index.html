@@ -57,7 +57,7 @@
                         <input type="button" value="Got Bid" ng-click="score.madeBid()"/>
                         <input type="button" value="Missed Bid" ng-click="score.missedBid()"/>
                     </td>
-                    <td>{{score.getPoints() | sign }}</td>
+                    <td>{{score.getPoints() | sign}}</td>
                 </tr>
             </table>
 
@@ -69,14 +69,16 @@
 
             <table>
                 <tr>
-                    <th></th>
+                    <th>Rank</th>
+                    <th>Player</th>
                     <th ng-repeat="round in rounds">
                         {{round.getName()}}
                     </th>
                     <th>Total</th>
                 </tr>
                 <tr ng-repeat="stat in stats | orderBy:rank">
-                    <td>{{stat.rank}} {{stat.player}}</td>
+                    <td>{{stat.rank | place}}</td>
+                    <td>{{stat.player}}</td>
                     <td ng-repeat="score in stat.scores">
                         <span ng-show="score.isReported()">{{score.getBid()}}</span>
                     </td>

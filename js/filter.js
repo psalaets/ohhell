@@ -19,4 +19,15 @@ angular.module("ohhell.filter", []).
             }
             return arr;
         };
+    }).
+    filter("place", function() {
+        var placeSuffixes = {
+            "1": "st",
+            "2": "nd",
+            "3": "rd"
+        };
+
+        return function(value) {
+            return value + (placeSuffixes[value] || "th");
+        }
     });
