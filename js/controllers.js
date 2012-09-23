@@ -8,6 +8,16 @@ function SetupController($scope, $location, gameService) {
     $scope.maxRound = 8;
     $scope.players = [];
 
+    $scope.$watch("players.length", function(newValue, oldValue, scope) {
+        if(newValue < 2) {
+            scope.message = "Need at least two players to begin";
+            scope.needMorePlayers = true;
+        } else {
+            scope.message = "";
+            scope.needMorePlayers = false;
+        }
+    });
+
     $scope.startGame = function() {
         gameService.startNewGame($scope.players, $scope.maxRound);
 

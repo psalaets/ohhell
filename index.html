@@ -38,8 +38,8 @@
                 <select ng-model="maxRound" ng-options="i.toString() for i in [1, 2, 3, 4, 5, 6, 7, 8]" class="span1"></select>
             </form>
 
-            <input class="btn btn-success" ng-disabled="players.length < 2" ng-class="{disabled: players.length < 2}" type="button" ng-click="startGame()" value="Start Game"/>
-            <span ng-show="players.length < 2">Need at least two players to begin</span>
+            <input class="btn btn-success" ng-disabled="needMorePlayers" ng-class="{disabled: needMorePlayers}" type="button" ng-click="startGame()" value="Start Game"/>
+            {{message}}
         </script>
 
         <script type="text/ng-template" id="round.html">
