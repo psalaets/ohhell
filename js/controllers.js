@@ -1,6 +1,27 @@
-function GameController($scope) {
-    $scope.game = new Game(['bob', 'joe', 'tom']);
-    $scope.game.start(3);
+function LandingController($scope, $location) {
+    $scope.setup = function() {
+        $location.path("/ohhell/setup");
+    };
+}
+
+function SetupController($scope, $location, gameService) {
+    $scope.maxRound = 8;
+    $scope.players = [];
+
+    $scope.startGame = function() {
+        gameService.startNewGame($scope.players, $scope.maxRound);
+
+        $location.path("/ohhell/round/current");
+    };
+}
+
+function RoundController($scope, $routeParams, gameService) {
+    var roundName = $routeParams.round;
+    if(roundName === "current") {
+        $scope.round = gameService.currentGame.getCurrentRound();
+    } else {
+        $scope.round = gameService.currentGame.getRound(roundName);
+    }
 
     //Helper for populating bid select
     $scope.zeroTo = function(max) {

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="ohhell">
+    <head>
+        <title>Oh Hell</title>
+    </head>
+    <body>
+
+        <div ng-view></div>
+
+        <script src="js/thirdparty/angular.js"></script>
+
+        <script src="js/RoundScore.js"></script>
+        <script src="js/Round.js"></script>
+        <script src="js/Game.js"></script>
+        <script src="js/controllers.js"></script>
+
+        <script src="js/service.js"></script>
+        <script src="js/app.js"></script>
+
+        <script type="text/ng-template" id="landing.html">
+            <h1>Oh Hell</h1>
+            <input type="button" value="New Game" ng-click="setup()"/>
+        </script>
+
+        <script type="text/ng-template" id="setup.html">
+            <h1>Setup</h1>
+
+            <form>
+                <h2>Who is playing?</h2>
+                <input ng-list ng-model="players" placeholder="1st dealer, 2nd dealer, etc"/>
+
+                <h2>Play up to...</h2>
+                <select ng-model="maxRound" ng-options="i.toString() for i in [1, 2, 3, 4, 5, 6, 7, 8]"></select>
+            </form>
+
+            <input type="button" value="Start Game" ng-click="startGame()"></input>
+        </script>
+
+        <script type="text/ng-template" id="round.html">
+            <h1>Round {{round.getName()}}</h1>
+            <table>
+                <tr>
+                    <th>Player</th>
+                    <th>Bid</th>
+                    <th>Result</th>
+                    <th>Points</th>
+                </tr>
+                <tr ng-repeat="score in round.getScores()">
+                    <td>{{score.getPlayer()}}</td>
+                    <td>
+                        <select ng-model="score.bid" ng-options="i.toString() for i in zeroTo(round.getMaxTricks())"></select>
+                    </td>
+                    <td>
+                        <input type="button" value="Got Bid" ng-click="score.madeBid()"/>
+                        <input type="button" value="Missed Bid" ng-click="score.missedBid()"/>
+                    </td>
+                    <td>{{score.getPoints()}}</td>
+                </tr>
+            </table>
+        </script>
+    </body>
+</html>
