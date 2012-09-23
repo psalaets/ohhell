@@ -1,0 +1,7 @@
+.table td.success {
+	background-color: #DFF0D8;
+}
+
+.table td.error {
+	background-color: #F2DEDE;
+}
