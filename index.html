@@ -5,8 +5,9 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-
-        <div ng-view></div>
+        <div class="container">
+            <div ng-view></div>
+        </div>
 
         <script src="js/thirdparty/angular.js"></script>
 
@@ -20,55 +21,55 @@
         <script src="js/app.js"></script>
 
         <script type="text/ng-template" id="landing.html">
-            <h1>Oh Hell</h1>
-
-            <input type="button" value="New Game" ng-click="setup()"/>
+            <div class="hero-unit">
+                <h1>Oh Hell</h1>
+                <p>Scorekeeper for a variation of <a href="http://en.wikipedia.org/wiki/Oh,_hell">Oh Hell</a></p>
+                <p><a class="btn btn-primary btn-large" ng-click="setup()">New Game</a></p>
+            </div>
         </script>
 
         <script type="text/ng-template" id="setup.html">
-            <h1>Setup</h1>
-
             <form>
-                <h2>Who is playing?</h2>
-                <input ng-list ng-model="players" placeholder="1st dealer, 2nd dealer, etc"/>
+                <h1>Who is playing?</h1>
+                <input ng-list ng-model="players" placeholder="1st dealer, 2nd dealer, etc" class="span6"/>
 
-                <h2>Play up to...</h2>
-                <select ng-model="maxRound" ng-options="i.toString() for i in [1, 2, 3, 4, 5, 6, 7, 8]"></select>
+                <h1>Play up to...</h1>
+                <select ng-model="maxRound" ng-options="i.toString() for i in [1, 2, 3, 4, 5, 6, 7, 8]" class="span1"></select>
             </form>
 
-            <input type="button" value="Start Game" ng-click="startGame()"/>
+            <a class="btn btn-success" ng-click="startGame()">Start Game</a>
         </script>
 
         <script type="text/ng-template" id="round.html">
             <h1>Round {{round.getName()}}</h1>
 
-            <table>
+            <table class="table table-striped">
                 <tr>
                     <th>Player</th>
                     <th>Bid</th>
-                    <th>Result</th>
+                    <th></th>
                     <th>Points</th>
                 </tr>
                 <tr ng-repeat="score in round.getScores()">
                     <td>{{score.getPlayer()}}</td>
                     <td>
-                        <select ng-model="score.bid" ng-options="i.toString() for i in 0 | upto:round.getMaxTricks()"></select>
+                        <select ng-model="score.bid" ng-options="i.toString() for i in 0 | upto:round.getMaxTricks()" class="span1"></select>
                     </td>
                     <td>
-                        <input type="button" value="Got Bid" ng-click="score.madeBid()"/>
-                        <input type="button" value="Missed Bid" ng-click="score.missedBid()"/>
+                        <input class="btn btn-success" type="button" value="Got Bid" ng-click="score.madeBid()"/>
+                        <input class="btn btn-danger" type="button" value="Missed Bid" ng-click="score.missedBid()"/>
                     </td>
                     <td>{{score.getPoints() | sign}}</td>
                 </tr>
             </table>
 
-            <input type="button" value="Round Finished" ng-click="roundFinished()"/>
+            <input class="btn" type="button" value="Round Finished" ng-click="roundFinished()"/>
         </script>
 
         <script type="text/ng-template" id="summary.html">
             <h1>Game Summary</h1>
 
-            <table>
+            <table class="table table-striped">
                 <tr>
                     <th>Rank</th>
                     <th>Player</th>
@@ -89,7 +90,7 @@
                 </tr>
             </table>
 
-            <input type="button" value="Next Round" ng-show="hasNextRound()" ng-click="nextRound()"/>
+            <input class="btn" type="button" value="Next Round" ng-show="hasNextRound()" ng-click="nextRound()"/>
         </script>
     </body>
 </html>
