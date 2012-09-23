@@ -22,15 +22,6 @@ function RoundController($scope, $routeParams, $location, gameService) {
     $scope.roundFinished = function() {
         $location.path("/ohhell/summary");
     };
-
-    //Helper for populating bid select
-    $scope.zeroTo = function(max) {
-        var values = [];
-        for(var i = 0; i <= max; i++) {
-            values.push(i);
-        }
-        return values;
-    };
 }
 
 function SummaryController($scope, $location, gameService, summaryService) {

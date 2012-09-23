@@ -51,7 +51,7 @@
                 <tr ng-repeat="score in round.getScores()">
                     <td>{{score.getPlayer()}}</td>
                     <td>
-                        <select ng-model="score.bid" ng-options="i.toString() for i in zeroTo(round.getMaxTricks())"></select>
+                        <select ng-model="score.bid" ng-options="i.toString() for i in 0 | upto:round.getMaxTricks()"></select>
                     </td>
                     <td>
                         <input type="button" value="Got Bid" ng-click="score.madeBid()"/>

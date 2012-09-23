@@ -10,4 +10,13 @@ angular.module("ohhell.filter", []).
                 }
             }
         }
+    }).
+    filter("upto", function() {
+        return function(start, end) {
+            var arr = [];
+            for(var i = start; i <= end; i++) {
+                arr.push(i);
+            }
+            return arr;
+        };
     });
