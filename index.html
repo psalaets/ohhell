@@ -15,6 +15,7 @@
         <script src="js/controllers.js"></script>
 
         <script src="js/service.js"></script>
+        <script src="js/filter.js"></script>
         <script src="js/app.js"></script>
 
         <script type="text/ng-template" id="landing.html">
@@ -54,7 +55,7 @@
                         <input type="button" value="Got Bid" ng-click="score.madeBid()"/>
                         <input type="button" value="Missed Bid" ng-click="score.missedBid()"/>
                     </td>
-                    <td>{{score.getPoints()}}</td>
+                    <td>{{score.getPoints() | sign }}</td>
                 </tr>
             </table>
 

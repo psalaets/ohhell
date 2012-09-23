@@ -1,4 +1,4 @@
-angular.module("ohhell", ["ohhell.service"]).
+angular.module("ohhell", ["ohhell.service", "ohhell.filter"]).
     config(["$routeProvider", function($routeProvider) {
     $routeProvider.
         when("/ohhell", {templateUrl: "landing.html", controller: LandingController}).
