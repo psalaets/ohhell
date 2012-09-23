@@ -26,18 +26,18 @@ describe("Round", function() {
         expect(scores[1].getPlayer()).toEqual('joe');
     });
 
-    it("is reported once made/missed is known for all scores", function() {
+    it("is finished once all scores are reported", function() {
         var r = new Round("round", 3, ['bob', 'joe']);
 
         var scores = r.getScores();
 
         scores[0].madeBid();
 
-        expect(r.isReported()).toEqual(false);
+        expect(r.isFinished()).toEqual(false);
 
         scores[1].missedBid();
 
-        expect(r.isReported()).toEqual(true);
+        expect(r.isFinished()).toEqual(true);
     });
 
     it("can return score for given player", function() {

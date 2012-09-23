@@ -50,12 +50,12 @@ Game.prototype = {
     },
     getCurrentRound: function() {
         return this.rounds.filter(function(round) {
-            return !round.isReported();
+            return !round.isFinished();
         })[0] || null;
     },
     isFinished: function() {
         return this.rounds.every(function(round) {
-            return round.isReported();
+            return round.isFinished();
         });
     },
     getScores: function(player) {

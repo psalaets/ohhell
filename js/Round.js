@@ -26,7 +26,7 @@ Round.prototype = {
             return score.getPlayer() === player;
         })[0] || null;
     },
-    isReported: function() {
+    isFinished: function() {
         return this.scores.every(function(score) {
             return score.isReported();
         });

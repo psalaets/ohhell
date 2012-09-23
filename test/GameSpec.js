@@ -46,7 +46,7 @@ describe("Game", function() {
         expect(rounds[6].getDealer()).toEqual('abe');
     });
 
-    it("considers current round to be earliest round that is not reported", function() {
+    it("considers current round to be earliest round that is not finished", function() {
         var game = new Game(['abe', 'ben'], 2),
             rounds = game.getRounds();
 
@@ -59,7 +59,7 @@ describe("Game", function() {
         expect(game.getCurrentRound()).toBe(rounds[1]);
     });
 
-    it("returns null for current round if all rounds are reported", function() {
+    it("returns null for current round if all rounds are finished", function() {
         var game = new Game(['abe', 'ben'], 2),
             rounds = game.getRounds();
 
@@ -74,7 +74,7 @@ describe("Game", function() {
         expect(game.getCurrentRound()).toBeNull();
     });
 
-    it("is finished once all rounds are reported", function() {
+    it("is finished once all rounds are finished", function() {
         var game = new Game(['abe', 'ben'], 2),
             rounds = game.getRounds();
 
