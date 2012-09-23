@@ -65,7 +65,7 @@
                     </tr>
                 </table>
 
-                <input class="btn" type="button" value="Round Finished" ng-click="roundFinished()"/>
+                <input class="btn" type="button" value="Round Finished" ng-show="round.isFinished()" ng-click="roundFinished()"/>
             </div>
         </script>
 
@@ -94,6 +94,7 @@
             </table>
 
             <input class="btn" type="button" value="Next Round" ng-show="hasNextRound()" ng-click="nextRound()"/>
+            <a href="#/ohhell" class="btn" ng-hide="hasNextRound()">Done</a>
         </script>
     </body>
 </html>
