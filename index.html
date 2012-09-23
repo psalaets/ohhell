@@ -70,15 +70,17 @@
             <table>
                 <tr>
                     <th></th>
-                    <th ng-repeat="round in game.getRounds()">
+                    <th ng-repeat="round in rounds">
                         {{round.getName()}}
                     </th>
+                    <th>Total</th>
                 </tr>
-                <tr ng-repeat="player in game.getPlayers()">
-                    <td>{{player}}</td>
-                    <td ng-repeat="score in game.getScores(player)">
+                <tr ng-repeat="stat in stats | orderBy:rank">
+                    <td>{{stat.rank}} {{stat.player}}</td>
+                    <td ng-repeat="score in stat.scores">
                         <span ng-show="score.isReported()">{{score.getBid()}}</span>
                     </td>
+                    <td>{{stat.total}}</td>
                 </tr>
             </table>
 

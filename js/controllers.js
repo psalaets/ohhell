@@ -33,10 +33,11 @@ function RoundController($scope, $routeParams, $location, gameService) {
     };
 }
 
-function SummaryController($scope, $location, gameService) {
+function SummaryController($scope, $location, gameService, summaryService) {
     var game = gameService.currentGame;
 
-    $scope.game = game;
+    $scope.rounds = game.getRounds();
+    $scope.stats = summaryService.generateStats(game);
 
     $scope.hasNextRound = function() {
         return !!game.getCurrentRound();
