@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="ohhell">
+    <head>
+        <title>Oh Hell</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/ohhell.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <div ng-view></div>
+        </div>
+
+        <script type="text/ng-template" id="landing.html">
+            <div class="hero-unit">
+                <h1>Oh Hell</h1>
+                <p>Scorekeeper for a variation of <a href="http://en.wikipedia.org/wiki/Oh,_hell">Oh Hell</a></p>
+                <p><input class="btn btn-primary btn-large" type="button" ng-click="setup()" value="New Game"/></p>
+            </div>
+        </script>
+
+        <script type="text/ng-template" id="setup.html">
+            <form>
+                <h1>Who is playing?</h1>
+                <input ng-list ng-model="players" placeholder="1st dealer, 2nd dealer, etc" class="span6"/>
+
+                <h1>Play up to...</h1>
+                <select ng-model="maxRound" ng-options="i.toString() for i in 1 | upto:maxRound" class="span1"></select>
+            </form>
+
+            <input class="btn btn-success" ng-disabled="needMorePlayers" ng-class="{disabled: needMorePlayers}" type="button" ng-click="startGame()" value="Start Game"/>
+            {{message}}
+        </script>
+
+        <script type="text/ng-template" id="round.html">
+            <div class="span6">
+                <h1>Round {{round.getName()}}</h1>
+
+                <table class="table">
+                    <tr>
+                        <th>Player</th>
+                        <th>Bid</th>
+                        <th></th>
+                        <th>Points</th>
+                    </tr>
+                    <tr ng-repeat="score in round.getScores()">
+                        <td>{{score.getPlayer()}}</td>
+                        <td>
+                            <select ng-model="score.bid" ng-options="i.toString() for i in 0 | upto:round.getMaxTricks()" class="span1"></select>
+                        </td>
+                        <td>
+                            <input class="btn btn-success" type="button" value="Got It" ng-click="score.madeBid()"/>
+                            <input class="btn btn-danger" type="button" value="Missed It" ng-click="score.missedBid()"/>
+                        </td>
+                        <td ng-class="{success: score.gotBid == true, error: score.gotBid == false}">{{score.getPoints() | sign}}</td>
+                    </tr>
+                </table>
+
+                <input class="btn" type="button" value="Round Finished" ng-show="round.isFinished()" ng-click="roundFinished()"/>
+            </div>
+        </script>
+
+        <script type="text/ng-template" id="scoreboard.html">
+            <h1>Scoreboard</h1>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th ng-repeat="round in rounds">
+                        {{round.getName()}}
+                    </th>
+                    <th>Total</th>
+                </tr>
+                <tr ng-repeat="stat in stats | orderBy:rank">
+                    <td>{{stat.rank | place}}</td>
+                    <td>{{stat.player}}</td>
+                    <td ng-repeat="score in stat.scores" ng-class="{success: score.gotBid == true, error: score.gotBid == false}">
+                        <span ng-show="score.isReported()">{{score.getBid()}}</span>
+                    </td>
+                    <td>{{stat.total}}</td>
+                </tr>
+            </table>
+
+            <input class="btn" type="button" value="Next Round" ng-show="hasNextRound()" ng-click="nextRound()"/>
+            <a href="#/ohhell" class="btn" ng-hide="hasNextRound()">Done</a>
+        </script>
+
+        <script src="js/angular.min.js"></script>
+        <script src="js/ohhell-0.1.0.min.js"></script>
+    </body>
+</html>
