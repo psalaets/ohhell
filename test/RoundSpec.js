@@ -56,4 +56,14 @@ describe("Round", function() {
 
         expect(r.getScore('tommy')).toBeNull();
     }));
+
+    it("knows total bids made", inject(function(Round) {
+        var r = new Round(1, "round", 3, ['bob', 'joe']);
+        var scores = r.getScores();
+
+        scores[0].setBid(2);
+        scores[1].setBid(1);
+
+        expect(r.getTotalBids()).toEqual(3);
+    }));
 });

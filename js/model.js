@@ -75,6 +75,11 @@
             return this.scores.every(function(score) {
                 return score.isReported();
             });
+        },
+        getTotalBids: function() {
+            return this.scores.reduce(function(total, score) {
+                return total + score.getBid();
+            }, 0);
         }
     };
 
