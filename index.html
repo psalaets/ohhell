@@ -41,8 +41,12 @@
                 <select ng-model="maxRound" ng-options="i.toString() for i in 1 | upto:maxRoundAllowed" class="span1"></select>
             </form>
 
-            <input class="btn btn-success" ng-disabled="needMorePlayers" ng-class="{disabled: needMorePlayers}" type="button" ng-click="startGame()" value="Start Game"/>
-            {{message}}
+            <input class="btn btn-success" ng-hide="needMorePlayers" type="button" ng-click="startGame()" value="Start Game"/>
+            <div class="alert alert-error" ng-show="needMorePlayers">
+                <strong>Add more players</strong><br>
+                {{message}}
+            </div>
+
         </script>
 
         <script type="text/ng-template" id="round.html">
