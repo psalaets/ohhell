@@ -10,15 +10,6 @@
             <div ng-view></div>
         </div>
 
-        <script src="js/thirdparty/angular.js"></script>
-
-        <script src="js/model.js"></script>
-        <script src="js/controller.js"></script>
-
-        <script src="js/service.js"></script>
-        <script src="js/filter.js"></script>
-        <script src="js/app.js"></script>
-
         <script type="text/ng-template" id="landing.html">
             <div class="hero-unit">
                 <h1>Oh Hell</h1>
@@ -93,5 +84,13 @@
             <input class="btn" type="button" value="Next Round" ng-show="hasNextRound()" ng-click="nextRound()"/>
             <a href="#/ohhell" class="btn" ng-hide="hasNextRound()">Done</a>
         </script>
+
+        <script src="js/thirdparty/angular.js"></script>
+
+        <script src="js/model.js"></script>
+        <script src="js/controller.js"></script>
+        <script src="js/service.js"></script>
+        <script src="js/filter.js"></script>
+        <script src="js/app.js"></script>
     </body>
 </html>
