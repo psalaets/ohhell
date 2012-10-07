@@ -14,6 +14,17 @@ describe("Game", function() {
         expect(game.getRounds().length).toEqual(15);
     }));
 
+    it("creates rounds with incrementing numeric ids", inject(function(Game) {
+        var game = new Game(['bob'], 3),
+            rounds = game.getRounds();
+
+        expect(rounds[0].getId()).toEqual(1);
+        expect(rounds[1].getId()).toEqual(2);
+        expect(rounds[2].getId()).toEqual(3);
+        expect(rounds[3].getId()).toEqual(4);
+        expect(rounds[4].getId()).toEqual(5);
+    }));
+
     it("creates rounds with correct number of max tricks", inject(function(Game) {
         var game = new Game(['bob'], 3),
             rounds = game.getRounds();
@@ -25,15 +36,15 @@ describe("Game", function() {
         expect(rounds[4].getMaxTricks()).toEqual(1);
     }));
 
-    it("names rounds to differentiate ascending/high/descending", inject(function(Game) {
+    it("names rounds based on max tricks", inject(function(Game) {
         var game = new Game(['bob'], 3),
             rounds = game.getRounds();
 
-        expect(rounds[0].getName()).toEqual("+1");
-        expect(rounds[1].getName()).toEqual("+2");
+        expect(rounds[0].getName()).toEqual("1");
+        expect(rounds[1].getName()).toEqual("2");
         expect(rounds[2].getName()).toEqual("3");
-        expect(rounds[3].getName()).toEqual("-2");
-        expect(rounds[4].getName()).toEqual("-1");
+        expect(rounds[3].getName()).toEqual("2");
+        expect(rounds[4].getName()).toEqual("1");
     }));
 
     it("rotates players as dealer", inject(function(Game) {
@@ -92,14 +103,14 @@ describe("Game", function() {
         expect(game.isFinished()).toEqual(true);
     }));
 
-    it("can get round by name", inject(function(Game) {
+    it("can get round by id", inject(function(Game) {
         var game = new Game(['bob'], 3),
             rounds = game.getRounds();
 
-        expect(game.getRound("+1")).toBe(rounds[0]);
-        expect(game.getRound("3")).toBe(rounds[2]);
-        expect(game.getRound("-1")).toBe(rounds[4]);
-        expect(game.getRound("blah")).toBeNull();
+        expect(game.getRound(1)).toBe(rounds[0]);
+        expect(game.getRound(3)).toBe(rounds[2]);
+        expect(game.getRound(5)).toBe(rounds[4]);
+        expect(game.getRound(0)).toBeNull();
     }));
 
     it("can get all of a player's scores", inject(function(Game) {

@@ -24,13 +24,13 @@ controller('SetupController', ['$scope', '$location', 'gameService', function($s
     $scope.startGame = function() {
         gameService.startNewGame($scope.players, $scope.maxRound);
 
-        $location.path("/ohhell/round/+1");
+        $location.path("/ohhell/round/1");
     };
 }]).
 
 controller('RoundController', ['$scope', '$routeParams', '$location', 'gameService', function($scope, $routeParams, $location, gameService) {
-    var roundName = $routeParams.round;
-    $scope.round = gameService.currentGame.getRound(roundName);
+    var roundId = $routeParams.round;
+    $scope.round = gameService.currentGame.getRound(parseInt(roundId, 10));
 
     $scope.roundFinished = function() {
         $location.path("/ohhell/scoreboard");
@@ -49,6 +49,6 @@ controller('ScoreboardController', ['$scope', '$location', 'gameService', 'summa
 
     $scope.nextRound = function() {
         var currentRound = game.getCurrentRound();
-        $location.path("/ohhell/round/" + currentRound.getName());
+        $location.path("/ohhell/round/" + currentRound.getId());
     };
 }]);

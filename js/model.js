@@ -39,7 +39,8 @@
         }
     };
 
-    function Round(name, maxTricks, players) {
+    function Round(id, name, maxTricks, players) {
+        this.id = id;
         this.name = name;
         this.maxTricks = maxTricks;
         this.dealer = players[0];
@@ -50,6 +51,9 @@
     }
 
     Round.prototype = {
+        getId: function() {
+            return this.id;
+        },
         getName: function() {
             return this.name;
         },
@@ -102,15 +106,15 @@
         },
         createAscendingRounds: function(highRound, players) {
             for(var i = 1; i < highRound; i++) {
-                this.rounds.push(new Round("+" + i, i, players.rotate()));
+                this.rounds.push(new Round(this.rounds.length + 1, i.toString(), i, players.rotate()));
             }
         },
         createHighRound: function(highRound, players) {
-            this.rounds.push(new Round(highRound.toString(), highRound, players.rotate()));
+            this.rounds.push(new Round(this.rounds.length + 1, highRound.toString(), highRound, players.rotate()));
         },
         createDescendingRounds: function(highRound, players) {
             for(var i = highRound - 1; i > 0; i--) {
-                this.rounds.push(new Round("-" + i, i, players.rotate()));
+                this.rounds.push(new Round(this.rounds.length + 1, i.toString(), i, players.rotate()));
             }
         },
         getPlayers: function() {
@@ -119,9 +123,9 @@
         getRounds: function() {
            return this.rounds;
         },
-        getRound: function(name) {
+        getRound: function(id) {
             return this.rounds.filter(function(round) {
-                return round.getName() === name;
+                return round.getId() === id;
             })[0] || null;
         },
         getCurrentRound: function() {
