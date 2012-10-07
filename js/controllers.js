@@ -1,10 +1,12 @@
-function LandingController($scope, $location) {
+angular.module('ohhell.controller', []).
+
+controller('LandingController', ['$scope', '$location', function($scope, $location) {
     $scope.setup = function() {
         $location.path("/ohhell/setup");
     };
-}
+}]).
 
-function SetupController($scope, $location, gameService) {
+controller('SetupController', ['$scope', '$location', 'gameService', function($scope, $location, gameService) {
     $scope.maxRound = 8;
     $scope.players = [];
 
@@ -23,18 +25,18 @@ function SetupController($scope, $location, gameService) {
 
         $location.path("/ohhell/round/+1");
     };
-}
+}]).
 
-function RoundController($scope, $routeParams, $location, gameService) {
+controller('RoundController', ['$scope', '$routeParams', '$location', 'gameService', function($scope, $routeParams, $location, gameService) {
     var roundName = $routeParams.round;
     $scope.round = gameService.currentGame.getRound(roundName);
 
     $scope.roundFinished = function() {
         $location.path("/ohhell/scoreboard");
     };
-}
+}]).
 
-function ScoreboardController($scope, $location, gameService, summaryService) {
+controller('ScoreboardController', ['$scope', '$location', 'gameService', 'summaryService', function($scope, $location, gameService, summaryService) {
     var game = gameService.currentGame;
 
     $scope.rounds = game.getRounds();
@@ -48,5 +50,4 @@ function ScoreboardController($scope, $location, gameService, summaryService) {
         var currentRound = game.getCurrentRound();
         $location.path("/ohhell/round/" + currentRound.getName());
     };
-
-}
+}]);
