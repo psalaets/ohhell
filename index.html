@@ -24,7 +24,7 @@
                 <input ng-list ng-model="players" placeholder="1st dealer, 2nd dealer, etc" class="span6"/>
 
                 <h1>Play up to...</h1>
-                <select ng-model="maxRound" ng-options="i.toString() for i in 1 | upto:maxRound" class="span1"></select>
+                <select ng-model="maxRound" ng-options="i.toString() for i in 1 | upto:maxRoundAllowed" class="span1"></select>
             </form>
 
             <input class="btn btn-success" ng-disabled="needMorePlayers" ng-class="{disabled: needMorePlayers}" type="button" ng-click="startGame()" value="Start Game"/>
@@ -32,30 +32,42 @@
         </script>
 
         <script type="text/ng-template" id="round.html">
-            <div class="span6">
-                <h1>Round {{round.getName()}}</h1>
+            <div class="row">
+                <div class="span12">
+                    <h1>Round {{round.getName()}}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span6">
+                    <table class="table">
+                        <tr>
+                            <th>Player</th>
+                            <th>Bid</th>
+                            <th></th>
+                            <th>Points</th>
+                        </tr>
+                        <tr ng-repeat="score in round.getScores()">
+                            <td>{{score.getPlayer()}}</td>
+                            <td>
+                                <select ng-model="score.bid" ng-options="i.toString() for i in 0 | upto:round.getMaxTricks()" class="span1"></select>
+                            </td>
+                            <td>
+                                <input class="btn btn-success" type="button" value="Got It" ng-click="score.madeBid()"/>
+                                <input class="btn btn-danger" type="button" value="Missed It" ng-click="score.missedBid()"/>
+                            </td>
+                            <td ng-class="{success: score.gotBid == true, error: score.gotBid == false}">{{score.getPoints() | sign}}</td>
+                        </tr>
+                    </table>
 
-                <table class="table">
-                    <tr>
-                        <th>Player</th>
-                        <th>Bid</th>
-                        <th></th>
-                        <th>Points</th>
-                    </tr>
-                    <tr ng-repeat="score in round.getScores()">
-                        <td>{{score.getPlayer()}}</td>
-                        <td>
-                            <select ng-model="score.bid" ng-options="i.toString() for i in 0 | upto:round.getMaxTricks()" class="span1"></select>
-                        </td>
-                        <td>
-                            <input class="btn btn-success" type="button" value="Got It" ng-click="score.madeBid()"/>
-                            <input class="btn btn-danger" type="button" value="Missed It" ng-click="score.missedBid()"/>
-                        </td>
-                        <td ng-class="{success: score.gotBid == true, error: score.gotBid == false}">{{score.getPoints() | sign}}</td>
-                    </tr>
-                </table>
-
-                <input class="btn" type="button" value="Round Finished" ng-show="round.isFinished()" ng-click="roundFinished()"/>
+                    <input class="btn" type="button" value="Round Finished" ng-show="round.isFinished()" ng-click="roundFinished()"/>
+                </div>
+                <div class="span3">
+                    <div class="well well-large">
+                        <p>{{round.getDealer()}} is Dealer</p>
+                        <p>{{round.getMaxTricks()}} Tricks Available</p>
+                        <p>{{round.getTotalBids()}} Total Bids</p>
+                    </div>
+                </div>
             </div>
         </script>
 
@@ -66,18 +78,18 @@
                 <tr>
                     <th>Rank</th>
                     <th>Player</th>
+                    <th>Total</th>
                     <th ng-repeat="round in rounds">
                         {{round.getName()}}
                     </th>
-                    <th>Total</th>
                 </tr>
                 <tr ng-repeat="stat in stats | orderBy:rank">
                     <td>{{stat.rank | place}}</td>
                     <td>{{stat.player}}</td>
+                    <td>{{stat.total}}</td>
                     <td ng-repeat="score in stat.scores" ng-class="{success: score.gotBid == true, error: score.gotBid == false}">
                         <span ng-show="score.isReported()">{{score.getBid()}}</span>
                     </td>
-                    <td>{{stat.total}}</td>
                 </tr>
             </table>
 
@@ -85,7 +97,7 @@
             <a href="#/ohhell" class="btn" ng-hide="hasNextRound()">Done</a>
         </script>
 
-        <script src="js/angular.min.js"></script>
-        <script src="js/ohhell-0.1.0.min.js"></script>
+        <script src="js/thirdparty/angular.min.js"></script>>
+        <script src="js/ohhell-0.2.0.min.js"></script>
     </body>
 </html>
