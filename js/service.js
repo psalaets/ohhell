@@ -1,12 +1,12 @@
-angular.module("ohhell.service", []).
-    factory("gameService", function() {
+angular.module("ohhell.service", ["ohhell.model"]).
+    factory("gameService", ["Game", function(Game) {
         return {
             currentGame: null,
             startNewGame: function(players, maxRound) {
                 this.currentGame = new Game(players, maxRound);
             }
         };
-    }).
+    }]).
     factory("summaryService", function() {
         return {
             //stats: scores, total, player, rank
