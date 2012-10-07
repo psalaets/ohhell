@@ -62,7 +62,7 @@
                     <input class="btn" type="button" value="Round Finished" ng-show="round.isFinished()" ng-click="roundFinished()"/>
                 </div>
                 <div class="span3">
-                    <div class="well well-large">
+                    <div id="round-details" class="well well-large">
                         <p>{{round.getDealer()}} is Dealer</p>
                         <p>{{round.getMaxTricks()}} Tricks Available</p>
                         <p>{{round.getTotalBids()}} Total Bids</p>
