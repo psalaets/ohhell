@@ -8,6 +8,7 @@ controller('LandingController', ['$scope', '$location', function($scope, $locati
 
 controller('SetupController', ['$scope', '$location', 'gameService', function($scope, $location, gameService) {
     $scope.maxRound = 8;
+    $scope.maxRoundAllowed = 8;
     $scope.players = [];
 
     $scope.$watch("players.length", function(newValue, oldValue, scope) {

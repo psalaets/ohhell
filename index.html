@@ -24,7 +24,7 @@
                 <input ng-list ng-model="players" placeholder="1st dealer, 2nd dealer, etc" class="span6"/>
 
                 <h1>Play up to...</h1>
-                <select ng-model="maxRound" ng-options="i.toString() for i in 1 | upto:maxRound" class="span1"></select>
+                <select ng-model="maxRound" ng-options="i.toString() for i in 1 | upto:maxRoundAllowed" class="span1"></select>
             </form>
 
             <input class="btn btn-success" ng-disabled="needMorePlayers" ng-class="{disabled: needMorePlayers}" type="button" ng-click="startGame()" value="Start Game"/>
