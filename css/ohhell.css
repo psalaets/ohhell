@@ -5,3 +5,8 @@
 .table td.error {
 	background-color: #F2DEDE;
 }
+
+#round-details {
+	position: fixed;
+	top: 60px;
+}
