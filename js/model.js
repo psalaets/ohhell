@@ -1,9 +1,9 @@
 (function(angular) {
 
     angular.module('ohhell.model', []).
-        value('RoundScore', RoundScore).
-        value('Round', Round).
-        value('Game', Game);
+        constant('RoundScore', RoundScore).
+        constant('Round', Round).
+        constant('Game', Game);
 
     function RoundScore(player) {
         this.player = player;
