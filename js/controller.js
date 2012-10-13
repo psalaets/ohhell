@@ -35,6 +35,10 @@ controller('RoundController', ['$scope', '$routeParams', '$location', 'gameServi
     $scope.roundFinished = function() {
         $location.path("/ohhell/scoreboard");
     };
+
+    $scope.everyoneGotIt = function() {
+        $scope.round.allScoresMadeBid();
+    };
 }]).
 
 controller('ScoreboardController', ['$scope', '$location', 'gameService', 'summaryService', function($scope, $location, gameService, summaryService) {

@@ -80,6 +80,11 @@
             return this.scores.reduce(function(total, score) {
                 return total + score.getBid();
             }, 0);
+        },
+        allScoresMadeBid: function() {
+            this.scores.forEach(function(score) {
+                score.madeBid();
+            });
         }
     };
 

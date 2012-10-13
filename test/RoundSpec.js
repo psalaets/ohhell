@@ -66,4 +66,14 @@ describe("Round", function() {
 
         expect(r.getTotalBids()).toEqual(3);
     }));
+
+    it("can bulk flag all scores as 'Made Bid'", inject(function(Round) {
+        var r = new Round(1, "round", 3, ['bob', 'joe']);
+
+        r.allScoresMadeBid();
+
+        var scores = r.getScores();
+        expect(scores[0].gotBid).toEqual(true);
+        expect(scores[1].gotBid).toEqual(true);
+    }));
 });
