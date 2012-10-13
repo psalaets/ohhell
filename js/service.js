@@ -3,7 +3,7 @@ angular.module("ohhell.service", ["ohhell.model"]).
         return {
             currentGame: null,
             startNewGame: function(players, maxRound) {
-                this.currentGame = new Game(players, maxRound);
+                this.currentGame = Game.create(players, maxRound);
             }
         };
     }]).

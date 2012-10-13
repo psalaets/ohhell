@@ -88,41 +88,64 @@
         }
     };
 
-    function Game(players, highRound) {
-        this.players = players;
-
+    function Game() {
+        this.players = [];
         this.rounds = [];
-        this.createRounds(highRound);
+    }
+
+    Game.create = function(players, highRound) {
+        var game = new Game();
+
+        game.players = players;
+        createRounds(game, highRound);
+
+        return game;
+    };
+
+    function createRounds(game, highRound) {
+        //Rotatable copy of players array
+        var players = game.players.slice(0);
+        players.rotate = function() {
+            //Put first element at back
+            this.push(this.shift());
+            //Return copy
+            return this.slice(0);
+        };
+
+        var roundId = 0;
+        function nextId() {
+            roundId += 1;
+            return roundId;
+        }
+
+        game.rounds = [].concat(
+            createAscendingRounds(nextId, highRound, players),
+            createHighRound(nextId,highRound, players),
+            createDescendingRounds(nextId, highRound, players)
+        );
+    }
+
+    function createAscendingRounds(nextId, highRound, players) {
+        var rounds = [];
+        for(var i = 1; i < highRound; i++) {
+            rounds.push(new Round(nextId(), i.toString(), i, players.rotate()));
+        }
+        return rounds;
+    }
+
+    function createHighRound(nextId, highRound, players) {
+        return new Round(nextId(), highRound.toString(), highRound, players.rotate());
+    }
+
+    function createDescendingRounds(nextId,highRound, players) {
+        var rounds = [];
+        for(var i = highRound - 1; i > 0; i--) {
+            rounds.push(new Round(nextId(), i.toString(), i, players.rotate()));
+        }
+        return rounds;
     }
 
     Game.prototype = {
-        createRounds: function(highRound) {
-            //Rotatable copy of players array
-            var players = this.players.slice(0);
-            players.rotate = function() {
-                //Put first element at back
-                this.push(this.shift());
-                //Return copy
-                return this.slice(0);
-            };
-
-            this.createAscendingRounds(highRound, players);
-            this.createHighRound(highRound, players);
-            this.createDescendingRounds(highRound, players);
-        },
-        createAscendingRounds: function(highRound, players) {
-            for(var i = 1; i < highRound; i++) {
-                this.rounds.push(new Round(this.rounds.length + 1, i.toString(), i, players.rotate()));
-            }
-        },
-        createHighRound: function(highRound, players) {
-            this.rounds.push(new Round(this.rounds.length + 1, highRound.toString(), highRound, players.rotate()));
-        },
-        createDescendingRounds: function(highRound, players) {
-            for(var i = highRound - 1; i > 0; i--) {
-                this.rounds.push(new Round(this.rounds.length + 1, i.toString(), i, players.rotate()));
-            }
-        },
         getPlayers: function() {
             return this.players;
         },

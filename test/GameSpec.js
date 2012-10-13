@@ -3,19 +3,19 @@ describe("Game", function() {
     beforeEach(module("ohhell.model"));
 
     it("keeps players in the order given", inject(function(Game) {
-        var game = new Game(['bob', 'tom'], 2);
+        var game = Game.create(['bob', 'tom'], 2);
 
         expect(game.getPlayers()).toEqual(['bob', 'tom']);
     }));
 
     it("has enough rounds to play to highRound and back down to 1", inject(function(Game) {
-        var game = new Game(['bob'], 8);
+        var game = Game.create(['bob'], 8);
 
         expect(game.getRounds().length).toEqual(15);
     }));
 
     it("creates rounds with incrementing numeric ids", inject(function(Game) {
-        var game = new Game(['bob'], 3),
+        var game = Game.create(['bob'], 3),
             rounds = game.getRounds();
 
         expect(rounds[0].getId()).toEqual(1);
@@ -26,7 +26,7 @@ describe("Game", function() {
     }));
 
     it("creates rounds with correct number of max tricks", inject(function(Game) {
-        var game = new Game(['bob'], 3),
+        var game = Game.create(['bob'], 3),
             rounds = game.getRounds();
 
         expect(rounds[0].getMaxTricks()).toEqual(1);
@@ -37,7 +37,7 @@ describe("Game", function() {
     }));
 
     it("names rounds based on max tricks", inject(function(Game) {
-        var game = new Game(['bob'], 3),
+        var game = Game.create(['bob'], 3),
             rounds = game.getRounds();
 
         expect(rounds[0].getName()).toEqual("1");
@@ -48,7 +48,7 @@ describe("Game", function() {
     }));
 
     it("rotates players as dealer", inject(function(Game) {
-        var game = new Game(['abe', 'ben', 'cal'], 4),
+        var game = Game.create(['abe', 'ben', 'cal'], 4),
             rounds = game.getRounds();
 
         expect(rounds[0].getDealer()).toEqual('abe');
@@ -61,7 +61,7 @@ describe("Game", function() {
     }));
 
     it("considers current round to be earliest round that is not finished", inject(function(Game) {
-        var game = new Game(['abe', 'ben'], 2),
+        var game = Game.create(['abe', 'ben'], 2),
             rounds = game.getRounds();
 
         //play first round
@@ -74,7 +74,7 @@ describe("Game", function() {
     }));
 
     it("returns null for current round if all rounds are finished", inject(function(Game) {
-        var game = new Game(['abe', 'ben'], 2),
+        var game = Game.create(['abe', 'ben'], 2),
             rounds = game.getRounds();
 
         //play all rounds
@@ -89,7 +89,7 @@ describe("Game", function() {
     }));
 
     it("is finished once all rounds are finished", inject(function(Game) {
-        var game = new Game(['abe', 'ben'], 2),
+        var game = Game.create(['abe', 'ben'], 2),
             rounds = game.getRounds();
 
         //play all rounds
@@ -104,7 +104,7 @@ describe("Game", function() {
     }));
 
     it("can get round by id", inject(function(Game) {
-        var game = new Game(['bob'], 3),
+        var game = Game.create(['bob'], 3),
             rounds = game.getRounds();
 
         expect(game.getRound(1)).toBe(rounds[0]);
@@ -114,7 +114,7 @@ describe("Game", function() {
     }));
 
     it("can get all of a player's scores", inject(function(Game) {
-        var game = new Game(['bob', 'joe'], 3),
+        var game = Game.create(['bob', 'joe'], 3),
             joesScores = game.getScores("joe");
 
         expect(joesScores.length).toEqual(5);
