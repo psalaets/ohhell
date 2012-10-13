@@ -61,7 +61,7 @@
                         <tr>
                             <th>Player</th>
                             <th>Bid</th>
-                            <th></th>
+                            <th><input type="button" class="btn btn-success" value="Everyone Got It" ng-click="everyoneGotIt()"/></th>
                             <th>Points</th>
                         </tr>
                         <tr ng-repeat="score in round.getScores()">
@@ -121,6 +121,6 @@
         </script>
 
         <script src="js/angular.min.js"></script>
-        <script src="js/ohhell-0.2.0.min.js"></script>
+        <script src="js/ohhell-0.3.0.min.js"></script>
     </body>
 </html>
