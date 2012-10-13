@@ -14,10 +14,10 @@ describe("Round", function() {
         expect(r.getMaxTricks()).toEqual(4);
     }));
 
-    it("makes first player the dealer", inject(function(Round) {
+    it("makes last player the dealer", inject(function(Round) {
         var r = new Round(1, "round", 3, ['bob', 'joe']);
 
-        expect(r.getDealer()).toEqual('bob');
+        expect(r.getDealer()).toEqual('joe');
     }));
 
     it("has a score for each player", inject(function(Round) {

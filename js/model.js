@@ -43,7 +43,7 @@
         this.id = id;
         this.name = name;
         this.maxTricks = maxTricks;
-        this.dealer = players[0];
+        this.dealer = players.slice(-1)[0];
 
         this.scores = players.map(function(player) {
             return new RoundScore(player);
@@ -95,14 +95,10 @@
             //Rotatable copy of players array
             var players = this.players.slice(0);
             players.rotate = function() {
-                //rotate redefines itself on first call, hmm...
-                this.rotate = function() {
-                    //Put first element at back
-                    this.push(this.shift());
-                    //Return copy
-                    return this.slice(0);
-                };
-                return this;
+                //Put first element at back
+                this.push(this.shift());
+                //Return copy
+                return this.slice(0);
             };
 
             this.createAscendingRounds(highRound, players);
