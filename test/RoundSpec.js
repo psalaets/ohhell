@@ -88,4 +88,30 @@ describe("Round", function() {
         expect(json.dealer).toEqual('joe');
         expect(json.scores.length).toEqual(2);
     }));
+
+    it('can be created with object from json', inject(function(Round) {
+        var json = {
+            id: 5,
+            name: 'Round',
+            maxTricks: 6,
+            dealer: 'bob',
+            scores: [{
+                player: 'joe',
+                bid: 2,
+                gotBid: false
+            }, {
+                player: 'bob',
+                bid: 3,
+                gotBid: null
+            }]
+        };
+
+        var round = Round.fromJson(json);
+
+        expect(round.getId()).toEqual(5);
+        expect(round.getName()).toEqual('Round');
+        expect(round.getMaxTricks()).toEqual(6);
+        expect(round.dealer).toEqual('bob');
+        expect(round.getScores().length).toEqual(2);
+    }));
 });

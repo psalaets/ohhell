@@ -44,6 +44,20 @@ describe("RoundScore", function() {
         expect(json.player).toEqual('bob');
     }));
 
+    it('can be created with object from json', inject(function(RoundScore) {
+        var json = {
+            bid: 2,
+            gotBid: false,
+            player: 'bob'
+        };
+
+        var score = RoundScore.fromJson(json);
+
+        expect(score.getBid()).toEqual(2);
+        expect(score.gotBid).toEqual(false);
+        expect(score.getPlayer()).toEqual('bob');
+    }));
+
     describe("made bid", function() {
         it("has <bid> + 10 points", inject(function(RoundScore) {
             var r = new RoundScore('bob');

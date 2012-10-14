@@ -131,4 +131,30 @@ describe("Game", function() {
         expect(json.players).toEqual(['bob', 'joe']);
         expect(json.rounds.length).toEqual(5);
     }));
+
+    it('can be created with object from json', inject(function(Game) {
+        var json = {
+            players: ['al', 'bill'],
+            rounds: [{
+                id: 5,
+                name: 'Round',
+                maxTricks: 6,
+                dealer: 'bob',
+                scores: [{
+                    player: 'joe',
+                    bid: 2,
+                    gotBid: false
+                }, {
+                    player: 'bob',
+                    bid: 3,
+                    gotBid: null
+                }]
+            }]
+        };
+
+        var game = Game.fromJson(json);
+
+        expect(game.getPlayers()).toEqual(['al', 'bill']);
+        expect(game.getRounds().length).toEqual(1);
+    }));
 });

@@ -12,6 +12,14 @@
         this.gotBid = null;
     }
 
+    //Expects object just parsed from json string
+    RoundScore.fromJson = function(json) {
+        var score = new RoundScore(json.player);
+        score.bid = json.bid;
+        score.gotBid = json.gotBid;
+        return score;
+    };
+
     RoundScore.prototype = {
         getPlayer: function() {
             return this.player;
@@ -59,6 +67,21 @@
         round.dealer = players.slice(-1)[0];
         round.scores = players.map(function(player) {
             return new RoundScore(player);
+        });
+
+        return round;
+    };
+
+    Round.fromJson = function(json) {
+        var round = new Round(
+            json.id,
+            json.name,
+            json.maxTricks,
+            json.dealer
+        );
+
+        round.scores = json.scores.map(function(scoreJson) {
+            return RoundScore.fromJson(scoreJson);
         });
 
         return round;
@@ -124,6 +147,15 @@
         game.players = players;
         createRounds(game, highRound);
 
+        return game;
+    };
+
+    Game.fromJson = function(json) {
+        var game = new Game();
+        game.players = json.players;
+        game.rounds = json.rounds.map(function(roundJson) {
+            return Round.fromJson(roundJson);
+        });
         return game;
     };
 
