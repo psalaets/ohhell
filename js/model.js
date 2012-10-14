@@ -139,6 +139,7 @@
     function Game() {
         this.players = [];
         this.rounds = [];
+        this.startTime = Date.now();
     }
 
     Game.create = function(players, highRound) {
@@ -152,6 +153,7 @@
 
     Game.fromJson = function(json) {
         var game = new Game();
+        game.startTime = json.startTime;
         game.players = json.players;
         game.rounds = json.rounds.map(function(roundJson) {
             return Round.fromJson(roundJson);
@@ -234,7 +236,8 @@
                 players: this.players,
                 rounds: this.rounds.map(function(round) {
                     return round.toJson();
-                })
+                }),
+                startTime: this.startTime
             };
         }
     };

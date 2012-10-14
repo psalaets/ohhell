@@ -130,10 +130,12 @@ describe("Game", function() {
 
         expect(json.players).toEqual(['bob', 'joe']);
         expect(json.rounds.length).toEqual(5);
+        expect(json.startTime).toBeDefined();
     }));
 
     it('can be created with object from json', inject(function(Game) {
         var json = {
+            startTime: 500,
             players: ['al', 'bill'],
             rounds: [{
                 id: 5,
@@ -156,5 +158,12 @@ describe("Game", function() {
 
         expect(game.getPlayers()).toEqual(['al', 'bill']);
         expect(game.getRounds().length).toEqual(1);
+        expect(game.startTime).toEqual(500);
+    }));
+
+    it('knows its start time', inject(function(Game) {
+        var g = Game.create(['bob', 'joe'], 3);
+
+        expect(g.startTime).toBeDefined();
     }));
 });
