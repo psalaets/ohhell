@@ -39,16 +39,23 @@
         }
     };
 
-    function Round(id, name, maxTricks, players) {
+    function Round(id, name, maxTricks, dealer) {
         this.id = id;
         this.name = name;
         this.maxTricks = maxTricks;
-        this.dealer = players.slice(-1)[0];
+        this.dealer = dealer;
+    }
 
-        this.scores = players.map(function(player) {
+    Round.create = function(id, name, maxTricks, players) {
+        var round = new Round(id, name, maxTricks);
+
+        round.dealer = players.slice(-1)[0];
+        round.scores = players.map(function(player) {
             return new RoundScore(player);
         });
-    }
+
+        return round;
+    };
 
     Round.prototype = {
         getId: function() {
@@ -128,19 +135,19 @@
     function createAscendingRounds(nextId, highRound, players) {
         var rounds = [];
         for(var i = 1; i < highRound; i++) {
-            rounds.push(new Round(nextId(), i.toString(), i, players.rotate()));
+            rounds.push(Round.create(nextId(), i.toString(), i, players.rotate()));
         }
         return rounds;
     }
 
     function createHighRound(nextId, highRound, players) {
-        return new Round(nextId(), highRound.toString(), highRound, players.rotate());
+        return Round.create(nextId(), highRound.toString(), highRound, players.rotate());
     }
 
     function createDescendingRounds(nextId,highRound, players) {
         var rounds = [];
         for(var i = highRound - 1; i > 0; i--) {
-            rounds.push(new Round(nextId(), i.toString(), i, players.rotate()));
+            rounds.push(Round.create(nextId(), i.toString(), i, players.rotate()));
         }
         return rounds;
     }
