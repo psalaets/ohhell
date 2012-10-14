@@ -161,7 +161,7 @@ describe("Game", function() {
         expect(game.startTime).toEqual(500);
     }));
 
-    it('knows its start time', inject(function(Game) {
+    it('records its start time', inject(function(Game) {
         var g = Game.create(['bob', 'joe'], 3);
 
         expect(g.startTime).toBeDefined();
