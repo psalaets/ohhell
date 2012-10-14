@@ -122,4 +122,13 @@ describe("Game", function() {
             expect(score.getPlayer() === "joe");
         });
     }));
+
+    it('can convert to json-ready object', inject(function(Game) {
+        var game = Game.create(['bob', 'joe'], 3);
+
+        var json = game.toJson();
+
+        expect(json.players).toEqual(['bob', 'joe']);
+        expect(json.rounds.length).toEqual(5);
+    }));
 });

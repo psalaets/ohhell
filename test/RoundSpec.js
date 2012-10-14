@@ -76,4 +76,16 @@ describe("Round", function() {
         expect(scores[0].gotBid).toEqual(true);
         expect(scores[1].gotBid).toEqual(true);
     }));
+
+    it("can convert to json-ready object", inject(function(Round) {
+        var r = Round.create(1, 'round', 3, ['bob', 'joe']);
+
+        var json = r.toJson();
+
+        expect(json.id).toEqual(1);
+        expect(json.name).toEqual('round');
+        expect(json.maxTricks).toEqual(3);
+        expect(json.dealer).toEqual('joe');
+        expect(json.scores.length).toEqual(2);
+    }));
 });

@@ -36,6 +36,13 @@
         },
         isReported: function() {
             return this.gotBid !== null;
+        },
+        toJson: function() {
+            return {
+                bid: this.bid,
+                gotBid: this.gotBid,
+                player: this.player
+            };
         }
     };
 
@@ -92,6 +99,17 @@
             this.scores.forEach(function(score) {
                 score.madeBid();
             });
+        },
+        toJson: function() {
+            return {
+                id: this.id,
+                name: this.name,
+                maxTricks: this.maxTricks,
+                dealer: this.dealer,
+                scores: this.scores.map(function(score) {
+                    return score.toJson();
+                })
+            };
         }
     };
 
@@ -178,6 +196,14 @@
             return this.rounds.map(function(round) {
                 return round.getScore(player);
             });
+        },
+        toJson: function() {
+            return {
+                players: this.players,
+                rounds: this.rounds.map(function(round) {
+                    return round.toJson();
+                })
+            };
         }
     };
 })(angular);

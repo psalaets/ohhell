@@ -32,6 +32,18 @@ describe("RoundScore", function() {
         expect(r.getPoints()).toBeNull();
     }));
 
+    it("can convert to json-ready object", inject(function(RoundScore) {
+        var r = new RoundScore('bob');
+        r.setBid(2);
+        r.madeBid();
+
+        var json = r.toJson();
+
+        expect(json.bid).toEqual(2);
+        expect(json.gotBid).toEqual(true);
+        expect(json.player).toEqual('bob');
+    }));
+
     describe("made bid", function() {
         it("has <bid> + 10 points", inject(function(RoundScore) {
             var r = new RoundScore('bob');
