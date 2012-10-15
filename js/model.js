@@ -62,9 +62,8 @@
     }
 
     Round.create = function(id, name, maxTricks, players) {
-        var round = new Round(id, name, maxTricks);
+        var round = new Round(id, name, maxTricks, players[0]);
 
-        round.dealer = players.slice(-1)[0];
         round.scores = players.map(function(player) {
             return new RoundScore(player);
         });
@@ -165,10 +164,14 @@
         //Rotatable copy of players array
         var players = game.players.slice(0);
         players.rotate = function() {
-            //Put first element at back
-            this.push(this.shift());
-            //Return copy
-            return this.slice(0);
+            //rotate redefines itself on first call, hmm...
+            this.rotate = function() {
+                //Put first element at back
+                this.push(this.shift());
+                //Return copy
+                return this.slice(0);
+            };
+            return this;
         };
 
         var roundId = 0;

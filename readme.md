@@ -23,8 +23,8 @@ Card dealt per round:
 
 ## Round Play
 
-1. Starting with player to dealer's left and going clockwise, players bid on how many tricks they will take
-2. First bidder plays the first card (winner of each trick plays the first card on the next trick)
+1. Starting with the dealer and going clockwise, players bid on how many tricks they will take
+2. Dealer plays the first card (winner of each trick plays the first card on the following trick)
 3. Remaining players must play a card of that suit if they have one.  They can play anything if they can't follow suit.
 
 ## Trick Taking
