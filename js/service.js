@@ -11,7 +11,7 @@ angular.module("ohhell.service", ["ohhell.model"]).
      * Local data layout:
      * games - game JSONs keyed by game start time
      */
-    factory('storageService', function() {
+    factory('storageService', ['Game', function(Game) {
         //Grab loStorage's storage global
         var store = storage;
 
@@ -36,15 +36,17 @@ angular.module("ohhell.service", ["ohhell.model"]).
                     games.push(hash[i]);
                 }
 
-                return games;
+                return games.map(function(gameJson) {
+                    return Game.fromJson(gameJson);
+                });
             },
             save: function(game) {
                 var hash = loadGamesHash();
-                hash[game.startTime] = game;
+                hash[game.startTime] = game.toJson();
                 saveGamesHash(hash);
             }
         };
-    }).
+    }]).
     factory("summaryService", function() {
         return {
             //stats: scores, total, player, rank
