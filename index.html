@@ -28,7 +28,10 @@
             <div class="hero-unit">
                 <h1>Oh Hell</h1>
                 <p>Scorekeeper for a variation of <a href="http://en.wikipedia.org/wiki/Oh,_hell">Oh Hell</a></p>
-                <p><input class="btn btn-primary btn-large" type="button" ng-click="setup()" value="New Game"/></p>
+                <p>
+                    <input class="btn btn-primary btn-large" type="button" ng-click="setup()" value="New Game"/>
+                    <input class="btn btn-large" type="button" ng-click="showSavedGames()" value="Resume ({{savedGameCount}})"/>
+                </p>
             </div>
         </script>
 
@@ -47,6 +50,25 @@
                 {{message}}
             </div>
 
+        </script>
+
+        <script type="text/ng-template" id="savedGames.html">
+            <h1>Games in Progress</h1>
+
+            <div class="row" ng-show="!savedGames.length">
+                <div class="well span6">
+                    No games in progress
+                </div>
+            </div>
+            <div class="row" ng-repeat="game in savedGames | orderBy:'-startTime'">
+                <div class="well span6">
+                    <h4>Started {{game.startTime | timeAgo}}</h4>
+                    <p>
+                        {{game.players | sentence}}
+                        <input class="btn pull-right" type="button" ng-click="resume(game)" value="Resume"/>
+                    </p>
+                </div>
+            </div>
         </script>
 
         <script type="text/ng-template" id="round.html">
@@ -117,10 +139,10 @@
             </table>
 
             <input class="btn" type="button" value="Next Round" ng-show="hasNextRound()" ng-click="nextRound()"/>
-            <a href="#/ohhell" class="btn" ng-hide="hasNextRound()">Done</a>
+            <input class="btn" type="button" value="Done" ng-hide="hasNextRound()" ng-click="done()"/>
         </script>
 
-        <script src="js/angular.min.js"></script>
-        <script src="js/ohhell-0.3.0.min.js"></script>
+        <script src="js/vendor-ohhell-0.5.0.min.js"></script>
+        <script src="js/ohhell-0.5.0.min.js"></script>
     </body>
 </html>
