@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     meta: {
-      version: '0.4.0',
+      version: '0.5.0',
       banner: '/*! Oh Hell Scorekeeper - v<%= meta.version %> - ' +
         '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
         '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
@@ -10,7 +10,7 @@ module.exports = function(grunt) {
       filename: 'ohhell-<%= meta.version %>'
     },
     concat: {
-      dist: {
+      mine: {
         src: [
           '<banner:meta.banner>',
           'js/model.js',
@@ -20,12 +20,24 @@ module.exports = function(grunt) {
           'js/app.js'
         ],
         dest: 'dist/<%= meta.filename %>.js'
+      },
+      vendor: {
+        src: [
+          'js/vendor/angular.js',
+          'js/vendor/lostorage.js',
+          'js/vendor/vagueTime.js'
+        ],
+        dest: 'dist/vendor-<%= meta.filename %>.js'
       }
     },
     min: {
-      dist: {
-        src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
+      mine: {
+        src: ['<banner:meta.banner>', '<config:concat.mine.dest>'],
         dest: 'dist/<%= meta.filename %>.min.js'
+      },
+      vendor: {
+        src: ['<config:concat.vendor.dest>'],
+        dest: 'dist/vendor-<%= meta.filename %>.min.js'
       }
     },
     uglify: {}
