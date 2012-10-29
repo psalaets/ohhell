@@ -55,6 +55,11 @@
         <script type="text/ng-template" id="savedGames.html">
             <h1>Games in Progress</h1>
 
+            <div class="row" ng-show="!savedGames.length">
+                <div class="well span6">
+                    No games in progress
+                </div>
+            </div>
             <div class="row" ng-repeat="game in savedGames | orderBy:'-startTime'">
                 <div class="well span6">
                     <h4>Started {{game.startTime | timeAgo}}</h4>
