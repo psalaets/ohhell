@@ -182,7 +182,7 @@
 
         game.rounds = [].concat(
             createAscendingRounds(nextId, highRound, players),
-            createHighRound(nextId,highRound, players),
+            createHighRound(nextId, highRound, players),
             createDescendingRounds(nextId, highRound, players)
         );
     }

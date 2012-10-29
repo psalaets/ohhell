@@ -6,6 +6,10 @@ controller('LandingController', ['$scope', '$location', 'storageService', functi
     $scope.setup = function() {
         $location.path("/ohhell/setup");
     };
+
+    $scope.showSavedGames = function() {
+        $location.path("/ohhell/games");
+    };
 }]).
 
 controller('SetupController', ['$scope', '$location', 'gameService', function($scope, $location, gameService) {
@@ -32,6 +36,13 @@ controller('SetupController', ['$scope', '$location', 'gameService', function($s
 
 controller('SavedGamesController', ['$scope', '$location', 'gameService', 'storageService', function($scope, $location, gameService, storageService) {
     $scope.savedGames = storageService.all();
+
+    $scope.resume = function(game) {
+        gameService.currentGame = game;
+
+        var nextRound = game.getCurrentRound();
+        $location.path("/ohhell/round/" + nextRound.id);
+    }
 }]).
 
 controller('RoundController', ['$scope', '$routeParams', '$location', 'gameService', 'storageService', function($scope, $routeParams, $location, gameService, storageService) {
