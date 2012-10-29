@@ -1,12 +1,4 @@
 angular.module("ohhell.service", ["ohhell.model"]).
-    factory("gameService", ["Game", function(Game) {
-        return {
-            currentGame: null,
-            startNewGame: function(players, maxRound) {
-                this.currentGame = Game.create(players, maxRound);
-            }
-        };
-    }]).
     /*
      * Local data layout:
      * games - game JSONs keyed by game start time

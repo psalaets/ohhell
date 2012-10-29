@@ -12,7 +12,7 @@ controller('LandingController', ['$scope', 'navService', 'storageService', funct
     };
 }]).
 
-controller('SetupController', ['$scope', 'navService', 'gameService', function($scope, navService, gameService) {
+controller('SetupController', ['$scope', 'navService', 'Game', 'storageService', function($scope, navService, Game, storageService) {
     $scope.maxRound = 8;
     $scope.maxRoundAllowed = 8;
     $scope.players = [];
@@ -28,32 +28,30 @@ controller('SetupController', ['$scope', 'navService', 'gameService', function($
     });
 
     $scope.startGame = function() {
-        gameService.startNewGame($scope.players, $scope.maxRound);
-        navService.currentRound(gameService.currentGame);
+        var game = Game.create($scope.players, $scope.maxRound);
+        storageService.save(game);
+        navService.currentRound(game);
     };
 }]).
 
-controller('SavedGamesController', ['$scope', 'navService', 'gameService', 'storageService', function($scope, navService, gameService, storageService) {
+controller('SavedGamesController', ['$scope', 'navService', 'storageService', function($scope, navService, storageService) {
     $scope.savedGames = storageService.all();
 
     $scope.resume = function(game) {
-        gameService.currentGame = game;
         navService.currentRound(game);
     }
 }]).
 
-controller('RoundController', ['$scope', '$routeParams', 'navService', 'gameService', 'storageService', function($scope, $routeParams, navService, gameService, storageService) {
+controller('RoundController', ['$scope', '$routeParams', 'navService', 'storageService', function($scope, $routeParams, navService, storageService) {
     var roundId = $routeParams.round;
     var gameTimestamp = $routeParams.gameTimestamp;
 
     var game = storageService.find(gameTimestamp);
-    gameService.currentGame = game;
-
-    $scope.round = gameService.currentGame.getRound(parseInt(roundId, 10));
+    $scope.round = game.getRound(parseInt(roundId, 10));
 
     $scope.roundFinished = function() {
-        storageService.save(gameService.currentGame);
-        navService.scoreboard(gameService.currentGame);
+        storageService.save(game);
+        navService.scoreboard(game);
     };
 
     $scope.everyoneGotIt = function() {
@@ -61,11 +59,10 @@ controller('RoundController', ['$scope', '$routeParams', 'navService', 'gameServ
     };
 }]).
 
-controller('ScoreboardController', ['$scope', '$routeParams', 'navService', 'gameService', 'summaryService', 'storageService', function($scope, $routeParams, navService, gameService, summaryService, storageService) {
+controller('ScoreboardController', ['$scope', '$routeParams', 'navService', 'summaryService', 'storageService', function($scope, $routeParams, navService, summaryService, storageService) {
     var gameTimestamp = $routeParams.gameTimestamp;
 
     var game = storageService.find(gameTimestamp);
-    gameService.currentGame = game;
 
     $scope.rounds = game.getRounds();
     $scope.stats = summaryService.generateStats(game);
