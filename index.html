@@ -63,8 +63,12 @@
             <div class="row" ng-repeat="game in savedGames | orderBy:'-startTime'">
                 <div class="well span6">
                     <h4>Started {{game.startTime | timeAgo}}</h4>
+                    <p>with {{game.players | sentence}}</p>
                     <p>
-                        {{game.players | sentence}}
+                        <span ng-pluralize count="roundsLeft(game)" when="{
+                            '1': '{} round remaining',
+                            'other': '{} rounds remaining'
+                        }"></span>
                         <input class="btn pull-right" type="button" ng-click="resume(game)" value="Resume"/>
                     </p>
                 </div>

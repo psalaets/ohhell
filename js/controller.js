@@ -40,6 +40,12 @@ controller('SavedGamesController', ['$scope', 'navService', 'storageService', fu
     $scope.resume = function(game) {
         navService.currentRound(game);
     }
+
+    $scope.roundsLeft = function(game) {
+        return game.getRounds().filter(function(round) {
+            return !round.isFinished();
+        }).length;
+    };
 }]).
 
 controller('RoundController', ['$scope', '$routeParams', 'navService', 'storageService', function($scope, $routeParams, navService, storageService) {
