@@ -53,13 +53,13 @@
         </script>
 
         <script type="text/ng-template" id="savedGames.html">
-            <h1>Saved Games</h1>
+            <h1>Games in Progress</h1>
 
             <div class="row" ng-repeat="game in savedGames">
                 <div class="well span6">
                     <h4>Started at {{game.startTime}}</h4>
                     <p>
-                        with {{game.players.join(', ')}}
+                        {{game.players | sentence}}
                         <input class="btn pull-right" type="button" ng-click="resume(game)" value="Resume"/>
                     </p>
                 </div>
