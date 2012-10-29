@@ -43,4 +43,14 @@ angular.module("ohhell.filter", []).
                 return valuesCopy.join(', ') + ' and ' + last.toString();
             }
         };
+    }).
+    filter('timeAgo', function() {
+        var vtime = vagueTime;
+
+        return function(value) {
+            return vtime.get({
+                from: value,
+                units: 'ms'
+            });
+        };
     });

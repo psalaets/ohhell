@@ -55,9 +55,9 @@
         <script type="text/ng-template" id="savedGames.html">
             <h1>Games in Progress</h1>
 
-            <div class="row" ng-repeat="game in savedGames">
+            <div class="row" ng-repeat="game in savedGames | orderBy:'-startTime'">
                 <div class="well span6">
-                    <h4>Started at {{game.startTime}}</h4>
+                    <h4>Started {{game.startTime | timeAgo}}</h4>
                     <p>
                         {{game.players | sentence}}
                         <input class="btn pull-right" type="button" ng-click="resume(game)" value="Resume"/>
@@ -139,6 +139,7 @@
 
         <script src="js/vendor/angular.js"></script>
         <script src="js/vendor/lostorage.js"></script>
+        <script src="js/vendor/vagueTime.js"></script>
 
         <script src="js/model.js"></script>
         <script src="js/controller.js"></script>
