@@ -44,6 +44,11 @@ angular.module("ohhell.service", ["ohhell.model"]).
                 var hash = loadGamesHash();
                 hash[game.startTime] = game.toJson();
                 saveGamesHash(hash);
+            },
+            remove: function(game) {
+                var hash = loadGamesHash();
+                delete hash[game.startTime];
+                saveGamesHash(hash);
             }
         };
     }]).

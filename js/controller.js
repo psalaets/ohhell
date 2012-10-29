@@ -59,7 +59,7 @@ controller('RoundController', ['$scope', '$routeParams', '$location', 'gameServi
     };
 }]).
 
-controller('ScoreboardController', ['$scope', '$location', 'gameService', 'summaryService', function($scope, $location, gameService, summaryService) {
+controller('ScoreboardController', ['$scope', '$location', 'gameService', 'summaryService', 'storageService', function($scope, $location, gameService, summaryService, storageService) {
     var game = gameService.currentGame;
 
     $scope.rounds = game.getRounds();
@@ -72,5 +72,10 @@ controller('ScoreboardController', ['$scope', '$location', 'gameService', 'summa
     $scope.nextRound = function() {
         var currentRound = game.getCurrentRound();
         $location.path("/ohhell/round/" + currentRound.getId());
+    };
+
+    $scope.done = function() {
+        storageService.remove(game);
+        $location.path("/ohhell");
     };
 }]);
