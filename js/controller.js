@@ -44,11 +44,16 @@ controller('SavedGamesController', ['$scope', 'navService', 'gameService', 'stor
 
 controller('RoundController', ['$scope', '$routeParams', 'navService', 'gameService', 'storageService', function($scope, $routeParams, navService, gameService, storageService) {
     var roundId = $routeParams.round;
+    var gameTimestamp = $routeParams.gameTimestamp;
+
+    var game = storageService.find(gameTimestamp);
+    gameService.currentGame = game;
+
     $scope.round = gameService.currentGame.getRound(parseInt(roundId, 10));
 
     $scope.roundFinished = function() {
         storageService.save(gameService.currentGame);
-        navService.scoreboard();
+        navService.scoreboard(gameService.currentGame);
     };
 
     $scope.everyoneGotIt = function() {
@@ -56,8 +61,11 @@ controller('RoundController', ['$scope', '$routeParams', 'navService', 'gameServ
     };
 }]).
 
-controller('ScoreboardController', ['$scope', 'navService', 'gameService', 'summaryService', 'storageService', function($scope, navService, gameService, summaryService, storageService) {
-    var game = gameService.currentGame;
+controller('ScoreboardController', ['$scope', '$routeParams', 'navService', 'gameService', 'summaryService', 'storageService', function($scope, $routeParams, navService, gameService, summaryService, storageService) {
+    var gameTimestamp = $routeParams.gameTimestamp;
+
+    var game = storageService.find(gameTimestamp);
+    gameService.currentGame = game;
 
     $scope.rounds = game.getRounds();
     $scope.stats = summaryService.generateStats(game);

@@ -49,6 +49,11 @@ angular.module("ohhell.service", ["ohhell.model"]).
                 var hash = loadGamesHash();
                 delete hash[game.startTime];
                 saveGamesHash(hash);
+            },
+            find: function(gameTimestamp) {
+                var hash = loadGamesHash();
+                var gameJson = hash[gameTimestamp];
+                return gameJson && Game.fromJson(gameJson);
             }
         };
     }]).
@@ -71,12 +76,15 @@ angular.module("ohhell.service", ["ohhell.model"]).
             savedGames: function() {
                 $location.path(join('games'));
             },
-            scoreboard: function() {
-                $location.path(join('scoreboard'));
+            scoreboard: function(game) {
+                $location.path(join('games', game.startTime));
             },
             currentRound: function(game) {
                 var currentRound = game.getCurrentRound();
-                $location.path(join('round', currentRound.getId()));
+                this.round(game, currentRound.getId());
+            },
+            round: function(game, roundId) {
+                $location.path(join('games', game.startTime, 'rounds', roundId));
             }
         };
     }]).
