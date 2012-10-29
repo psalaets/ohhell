@@ -7,6 +7,44 @@ angular.module("ohhell.service", ["ohhell.model"]).
             }
         };
     }]).
+    /*
+     * Local data layout:
+     * games - game JSONs keyed by game start time
+     */
+    factory('storageService', function() {
+        //Grab loStorage's storage global
+        var store = storage;
+
+        function loadGamesHash() {
+            return store.get('games');
+        }
+
+        function saveGamesHash(hash) {
+            return store.set('games', hash);
+        }
+
+        //Make sure games hash exists
+        saveGamesHash(loadGamesHash() || {});
+
+        return {
+            //returns array of games
+            all: function() {
+                var hash = loadGamesHash();
+                var games = [];
+
+                for (var i in hash) {
+                    games.push(hash[i]);
+                }
+
+                return games;
+            },
+            save: function(game) {
+                var hash = loadGamesHash();
+                hash[game.startTime] = game;
+                saveGamesHash(hash);
+            }
+        };
+    }).
     factory("summaryService", function() {
         return {
             //stats: scores, total, player, rank

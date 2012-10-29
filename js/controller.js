@@ -1,6 +1,8 @@
 angular.module('ohhell.controller', []).
 
-controller('LandingController', ['$scope', '$location', function($scope, $location) {
+controller('LandingController', ['$scope', '$location', 'storageService', function($scope, $location, storageService) {
+    $scope.savedGameCount = storageService.all().length;
+
     $scope.setup = function() {
         $location.path("/ohhell/setup");
     };
@@ -28,11 +30,16 @@ controller('SetupController', ['$scope', '$location', 'gameService', function($s
     };
 }]).
 
-controller('RoundController', ['$scope', '$routeParams', '$location', 'gameService', function($scope, $routeParams, $location, gameService) {
+controller('SavedGamesController', ['$scope', '$location', 'gameService', 'storageService', function($scope, $location, gameService, storageService) {
+    $scope.savedGames = storageService.all();
+}]).
+
+controller('RoundController', ['$scope', '$routeParams', '$location', 'gameService', 'storageService', function($scope, $routeParams, $location, gameService, storageService) {
     var roundId = $routeParams.round;
     $scope.round = gameService.currentGame.getRound(parseInt(roundId, 10));
 
     $scope.roundFinished = function() {
+        storageService.save(gameService.currentGame);
         $location.path("/ohhell/scoreboard");
     };
 
