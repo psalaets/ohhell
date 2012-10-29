@@ -1,18 +1,18 @@
 angular.module('ohhell.controller', []).
 
-controller('LandingController', ['$scope', '$location', 'storageService', function($scope, $location, storageService) {
+controller('LandingController', ['$scope', 'navService', 'storageService', function($scope, navService, storageService) {
     $scope.savedGameCount = storageService.all().length;
 
     $scope.setup = function() {
-        $location.path("/ohhell/setup");
+        navService.newGame();
     };
 
     $scope.showSavedGames = function() {
-        $location.path("/ohhell/games");
+        navService.savedGames();
     };
 }]).
 
-controller('SetupController', ['$scope', '$location', 'gameService', function($scope, $location, gameService) {
+controller('SetupController', ['$scope', 'navService', 'gameService', function($scope, navService, gameService) {
     $scope.maxRound = 8;
     $scope.maxRoundAllowed = 8;
     $scope.players = [];
@@ -29,29 +29,26 @@ controller('SetupController', ['$scope', '$location', 'gameService', function($s
 
     $scope.startGame = function() {
         gameService.startNewGame($scope.players, $scope.maxRound);
-
-        $location.path("/ohhell/round/1");
+        navService.currentRound(gameService.currentGame);
     };
 }]).
 
-controller('SavedGamesController', ['$scope', '$location', 'gameService', 'storageService', function($scope, $location, gameService, storageService) {
+controller('SavedGamesController', ['$scope', 'navService', 'gameService', 'storageService', function($scope, navService, gameService, storageService) {
     $scope.savedGames = storageService.all();
 
     $scope.resume = function(game) {
         gameService.currentGame = game;
-
-        var nextRound = game.getCurrentRound();
-        $location.path("/ohhell/round/" + nextRound.id);
+        navService.currentRound(game);
     }
 }]).
 
-controller('RoundController', ['$scope', '$routeParams', '$location', 'gameService', 'storageService', function($scope, $routeParams, $location, gameService, storageService) {
+controller('RoundController', ['$scope', '$routeParams', 'navService', 'gameService', 'storageService', function($scope, $routeParams, navService, gameService, storageService) {
     var roundId = $routeParams.round;
     $scope.round = gameService.currentGame.getRound(parseInt(roundId, 10));
 
     $scope.roundFinished = function() {
         storageService.save(gameService.currentGame);
-        $location.path("/ohhell/scoreboard");
+        navService.scoreboard();
     };
 
     $scope.everyoneGotIt = function() {
@@ -59,7 +56,7 @@ controller('RoundController', ['$scope', '$routeParams', '$location', 'gameServi
     };
 }]).
 
-controller('ScoreboardController', ['$scope', '$location', 'gameService', 'summaryService', 'storageService', function($scope, $location, gameService, summaryService, storageService) {
+controller('ScoreboardController', ['$scope', 'navService', 'gameService', 'summaryService', 'storageService', function($scope, navService, gameService, summaryService, storageService) {
     var game = gameService.currentGame;
 
     $scope.rounds = game.getRounds();
@@ -70,12 +67,11 @@ controller('ScoreboardController', ['$scope', '$location', 'gameService', 'summa
     };
 
     $scope.nextRound = function() {
-        var currentRound = game.getCurrentRound();
-        $location.path("/ohhell/round/" + currentRound.getId());
+        navService.currentRound(game);
     };
 
     $scope.done = function() {
         storageService.remove(game);
-        $location.path("/ohhell");
+        navService.landingPage();
     };
 }]);

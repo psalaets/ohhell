@@ -52,6 +52,28 @@ angular.module("ohhell.service", ["ohhell.model"]).
             }
         };
     }]).
+    factory('navService', ['$location', function($location) {
+        var base = '/ohhell/';
+
+        return {
+            landingPage: function() {
+                $location.path(base);
+            },
+            newGame: function() {
+                $location.path(base + 'setup');
+            },
+            savedGames: function() {
+                $location.path(base + 'games');
+            },
+            scoreboard: function() {
+                $location.path(base + 'scoreboard');
+            },
+            currentRound: function(game) {
+                var currentRound = game.getCurrentRound();
+                $location.path(base + 'round/' + currentRound.getId());
+            }
+        };
+    }]).
     factory("summaryService", function() {
         return {
             //stats: scores, total, player, rank
