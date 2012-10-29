@@ -53,11 +53,12 @@ angular.module("ohhell.service", ["ohhell.model"]).
         };
     }]).
     factory('navService', ['$location', function($location) {
-        var base = '/ohhell';
+        var base = '/';
 
+        //Join some segments with slash with 'base path' at the front
         function join(/* segments */) {
             var segments = Array.prototype.slice.call(arguments, 0);
-            return segments.join('/');
+            return base + segments.join('/');
         }
 
         return {
@@ -65,17 +66,17 @@ angular.module("ohhell.service", ["ohhell.model"]).
                 $location.path(base);
             },
             newGame: function() {
-                $location.path(join(base, 'setup'));
+                $location.path(join('new'));
             },
             savedGames: function() {
-                $location.path(join(base, 'games'));
+                $location.path(join('games'));
             },
             scoreboard: function() {
-                $location.path(join(base, 'scoreboard'));
+                $location.path(join('scoreboard'));
             },
             currentRound: function(game) {
                 var currentRound = game.getCurrentRound();
-                $location.path(join(base, 'round', currentRound.getId()));
+                $location.path(join('round', currentRound.getId()));
             }
         };
     }]).
