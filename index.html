@@ -53,12 +53,17 @@
         </script>
 
         <script type="text/ng-template" id="savedGames.html">
-            <ul>
-                <li ng-repeat="game in savedGames">
-                    Started at {{game.startTime}} with {{game.players.join(', ')}}
-                    <input class="btn" type="button" ng-click="resume(game)" value="Resume"/>
-                </li>
-            </ul>
+            <h1>Saved Games</h1>
+
+            <div class="row" ng-repeat="game in savedGames">
+                <div class="well span6">
+                    <h4>Started at {{game.startTime}}</h4>
+                    <p>
+                        with {{game.players.join(', ')}}
+                        <input class="btn pull-right" type="button" ng-click="resume(game)" value="Resume"/>
+                    </p>
+                </div>
+            </div>
         </script>
 
         <script type="text/ng-template" id="round.html">
