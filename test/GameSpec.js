@@ -166,4 +166,16 @@ describe("Game", function() {
 
         expect(g.startTime).toBeDefined();
     }));
+
+    it('can count unfinished rounds', inject(function(Game) {
+        var game = Game.create(['bob', 'joe'], 2);
+
+        //play first round
+        game.getRounds()[0].getScores().forEach(function(score) {
+            score.setBid(1);
+            score.madeBid();
+        });
+
+        expect(game.roundsLeft()).toBe(2);
+    }));
 });

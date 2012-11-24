@@ -65,7 +65,7 @@
                     <h4>Started {{game.startTime | timeAgo}}</h4>
                     <p>with {{game.players | sentence}}</p>
                     <p>
-                        <span ng-pluralize count="roundsLeft(game)" when="{
+                        <span ng-pluralize count="game.roundsLeft()" when="{
                             '1': '{} round remaining',
                             'other': '{} rounds remaining'
                         }"></span>

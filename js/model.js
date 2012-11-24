@@ -242,6 +242,11 @@
                 }),
                 startTime: this.startTime
             };
+        },
+        roundsLeft: function() {
+            return this.rounds.filter(function(round) {
+                return !round.isFinished();
+            }).length;
         }
     };
 })(angular);
