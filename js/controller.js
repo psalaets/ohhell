@@ -73,7 +73,7 @@ controller('ScoreboardController', ['$scope', '$routeParams', 'navService', 'sum
     $scope.stats = summaryService.generateStats(game);
 
     $scope.hasNextRound = function() {
-        return !!game.getCurrentRound();
+        return game.roundsLeft();
     };
 
     $scope.nextRound = function() {
