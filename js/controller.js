@@ -27,10 +27,6 @@ controller('SetupController', ['$scope', 'navService', 'Game', 'storageService',
         }
     });
 
-    $scope.totalRounds = function() {
-        return ($scope.maxRound * 2) - 1;
-    };
-
     $scope.startGame = function() {
         var game = Game.create($scope.players, $scope.maxRound);
         storageService.save(game);

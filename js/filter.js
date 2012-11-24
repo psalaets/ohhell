@@ -53,4 +53,12 @@ angular.module("ohhell.filter", []).
                 units: 'ms'
             });
         };
+    }).
+    filter('withTotalRounds', function() {
+        return function(maxRound) {
+            var total = (maxRound * 2) - 1;
+            var message = total === 1 ? '1 round' : total + ' total rounds';
+
+            return maxRound + ' (' + message + ')';
+        }
     });
