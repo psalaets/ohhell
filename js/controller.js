@@ -38,7 +38,12 @@ controller('SavedGamesController', ['$scope', 'navService', 'storageService', fu
     $scope.savedGames = storageService.all();
 
     $scope.resume = function(game) {
-        navService.currentRound(game);
+        if(game.roundsLeft()) {
+            navService.currentRound(game);
+        } else {
+            navService.scoreboard(game);
+        }
+
     }
 }]).
 
