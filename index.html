@@ -121,7 +121,7 @@
                             <th><input type="button" class="btn btn-success" value="Everyone Got It" ng-click="everyoneGotIt()"/></th>
                             <th>Points</th>
                         </tr>
-                        <tr ng-repeat="score in round.getScores()">
+                        <tr ng-repeat="score in round.getScores()" ng-class="{success: score.gotBid == true, error: score.gotBid == false}">
                             <td>{{score.getPlayer()}}</td>
                             <td>
                                 <select ng-model="score.bid" ng-options="i.toString() for i in 0 | upto:round.getMaxTricks()" class="span1"></select>
@@ -130,7 +130,7 @@
                                 <input class="btn btn-success" type="button" value="Got It" ng-click="score.madeBid()"/>
                                 <input class="btn btn-danger" type="button" value="Missed It" ng-click="score.missedBid()"/>
                             </td>
-                            <td ng-class="{success: score.gotBid == true, error: score.gotBid == false}">{{score.getPoints() | sign}}</td>
+                            <td>{{score.getPoints() | sign}}</td>
                         </tr>
                     </table>
 
