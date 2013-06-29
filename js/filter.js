@@ -24,7 +24,10 @@ angular.module("ohhell.filter", []).
         var placeSuffixes = {
             "1": "st",
             "2": "nd",
-            "3": "rd"
+            "3": "rd",
+            "11": "th",
+            "12": "th",
+            "13": "th"
         };
 
         return function(value) {
