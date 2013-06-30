@@ -5,11 +5,11 @@
         <title>Oh Hell</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <style type="text/css">
-            .table td.success {
+            .table .success {
                 background-color: #DFF0D8;
             }
 
-            .table td.error {
+            .table .error {
                 background-color: #F2DEDE;
             }
 
@@ -121,7 +121,7 @@
                             <th><input type="button" class="btn btn-success" value="Everyone Got It" ng-click="everyoneGotIt()"/></th>
                             <th>Points</th>
                         </tr>
-                        <tr ng-repeat="score in round.getScores()">
+                        <tr ng-repeat="score in round.getScores()" ng-class="{success: score.gotBid == true, error: score.gotBid == false}">
                             <td>{{score.getPlayer()}}</td>
                             <td>
                                 <select ng-model="score.bid" ng-options="i.toString() for i in 0 | upto:round.getMaxTricks()" class="span1"></select>
@@ -130,7 +130,7 @@
                                 <input class="btn btn-success" type="button" value="Got It" ng-click="score.madeBid()"/>
                                 <input class="btn btn-danger" type="button" value="Missed It" ng-click="score.missedBid()"/>
                             </td>
-                            <td ng-class="{success: score.gotBid == true, error: score.gotBid == false}">{{score.getPoints() | sign}}</td>
+                            <td>{{score.getPoints() | sign}}</td>
                         </tr>
                     </table>
 
@@ -153,7 +153,6 @@
 
         <script type="text/ng-template" id="scoreboard.html">
             <h1>Scoreboard</h1>
-
             <table class="table table-bordered">
                 <tr>
                     <th>Rank</th>
@@ -177,7 +176,7 @@
             <input class="btn" type="button" value="Done" ng-hide="hasNextRound()" ng-click="done()"/>
         </script>
 
-        <script src="js/vendor-ohhell-0.6.0.min.js"></script>
-        <script src="js/ohhell-0.6.0.min.js"></script>
+        <script src="js/vendor-ohhell-0.7.0.min.js"></script>
+        <script src="js/ohhell-0.7.0.min.js"></script>
     </body>
 </html>
