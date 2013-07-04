@@ -25,9 +25,11 @@ directive('ohhellTrend', function() {
         if (showPlot) {
           // plot scores
           $(element).sparkline(scope.playerScores, {
-            fillColor: false,     // disable fill
-            maxSpotColor: false,  // disable spot on max y value
-            minSpotColor: false   // disable spot on min y value
+            fillColor: false,               // disable fill
+            maxSpotColor: false,            // disable spot on max y value
+            minSpotColor: false,            // disable spot on min y value
+            chartRangeMin: scope.minScore,
+            chartRangeMax: scope.maxScore
           });
         }
       });
