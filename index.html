@@ -17,6 +17,10 @@
                 position: fixed;
                 top: 60px;
             }
+
+            .trend {
+                border: 1px #CCC solid;
+            }
         </style>
     </head>
     <body>
@@ -164,7 +168,14 @@
                 </tr>
                 <tr ng-repeat="stat in stats | orderBy:rank">
                     <td>{{stat.rank | place}}</td>
-                    <td>{{stat.player}}</td>
+                    <td>
+                        <p>{{stat.player}}</p>
+                        <span class="trend"
+                              ohhell-trend
+                              player-scores="stat.totalScoresPerRound"
+                              max-score="{{stats.maxScore}}"
+                              min-score="{{stats.minScore}}"></span>
+                    </td>
                     <td>{{stat.total}}</td>
                     <td ng-repeat="score in stat.scores" ng-class="{success: score.gotBid == true, error: score.gotBid == false}">
                         <span ng-show="score.isReported()">{{score.getBid()}}</span>
@@ -176,7 +187,7 @@
             <input class="btn" type="button" value="Done" ng-hide="hasNextRound()" ng-click="done()"/>
         </script>
 
-        <script src="js/vendor-ohhell-0.7.0.min.js"></script>
-        <script src="js/ohhell-0.7.0.min.js"></script>
+        <script src="js/vendor-ohhell-0.8.0.min.js"></script>
+        <script src="js/ohhell-0.8.0.min.js"></script>
     </body>
 </html>
