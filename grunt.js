@@ -14,6 +14,7 @@ module.exports = function(grunt) {
         src: [
           '<banner:meta.banner>',
           'js/model.js',
+          'js/directive.js',
           'js/controller.js',
           'js/service.js',
           'js/filter.js',
@@ -23,6 +24,8 @@ module.exports = function(grunt) {
       },
       vendor: {
         src: [
+          'js/vendor/jquery.js',
+          'js/vendor/jquery.sparkline.js',
           'js/vendor/angular.js',
           'js/vendor/lostorage.js',
           'js/vendor/vagueTime.js'
