@@ -94,6 +94,11 @@ angular.module("ohhell.service", ["ohhell.model"]).
               totalScoresPerRound: array of number
             }
 
+            it also has two properties:
+
+            maxScore - max score by any player at any point in the game
+            minScore - min score by any player at any point in the game
+
             */
             generateStats: function(game) {
                 var thisService = this;
@@ -101,6 +106,7 @@ angular.module("ohhell.service", ["ohhell.model"]).
                     return thisService.generateStat(player, game);
                 });
                 this.rank(stats);
+                this.minAndMaxRoundScore(stats);
                 return stats;
             },
             generateStat: function(player, game) {
@@ -111,9 +117,22 @@ angular.module("ohhell.service", ["ohhell.model"]).
 
                 this.total(stat);
                 this.streak(stat);
-                this.totalScorePerRound(stat);
+                this.totalScoresPerRound(stat);
 
                 return stat;
+            },
+            //assumes each stat has totalScorePerRound
+            minAndMaxRoundScore: function(stats) {
+                var min = 0;
+                var max = 0;
+
+                stats.forEach(function(stat) {
+                    min = Math.min(min, Math.min.apply(Math, stat.totalScoresPerRound));
+                    max = Math.max(max, Math.max.apply(Math, stat.totalScoresPerRound));
+                });
+
+                stats.minScore = min;
+                stats.maxScore = max;
             },
             //assumes stats have total
             rank: function(stats) {
@@ -172,7 +191,7 @@ angular.module("ohhell.service", ["ohhell.model"]).
                 stat.streak = (mostRecentResult ? "Got " : "Missed ") + count;
             },
             //assumes stat has scores
-            totalScorePerRound: function(stat) {
+            totalScoresPerRound: function(stat) {
                 var scoredRounds = stat.scores.filter(function(roundScore) {
                     return roundScore.isReported();
                 });
@@ -184,6 +203,9 @@ angular.module("ohhell.service", ["ohhell.model"]).
                     runningTotal += roundScore.getPoints();
                     totalScoresPerRound.push(runningTotal);;
                 });
+
+                // Sneak a zero on the front to represent starting score
+                totalScoresPerRound.unshift(0);
 
                 stat.totalScoresPerRound = totalScoresPerRound;
             }

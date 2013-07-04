@@ -5,22 +5,31 @@ directive('ohhellTrend', function() {
     restrict: 'A',
     scope: {
       // total score at each round for a player
-      playerScores: '=' // accept scores array by reference
+      playerScores: '=', // by reference
+      // lowest score for any player, at any point in the game
+      minScore: '@', // by value
+      // highest score for any player, at any point in the game
+      maxScore: '@' // by value
     },
     link: function(scope, element, attributes) {
-      scope.$watch('playerScores', function(newValue) {
-        // Make a copy
-        newValue = newValue.slice(0);
+      // Not sure if this is needed
+      function everythingAvailable() {
+        return scope.minScore !== undefined
+          && scope.maxScore !== undefined
+          && scope.playerScores !== undefined;
+      }
 
-        // Sneak a zero on the front so start of line looks better
-        newValue.unshift(0);
-
-        // plot scores
-        $(element).sparkline(newValue, {
-          fillColor: false,     // disable fill
-          maxSpotColor: false,  // disable spot on max y value
-          minSpotColor: false   // disable spot on min y value
-        });
+      scope.$watch(function() {
+        return everythingAvailable();
+      }, function(showPlot) {
+        if (showPlot) {
+          // plot scores
+          $(element).sparkline(scope.playerScores, {
+            fillColor: false,     // disable fill
+            maxSpotColor: false,  // disable spot on max y value
+            minSpotColor: false   // disable spot on min y value
+          });
+        }
       });
     }
   };
