@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     meta: {
-      version: '0.7.0',
+      version: '0.8.0',
       banner: '/*! Oh Hell Scorekeeper - v<%= meta.version %> - ' +
         '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
         '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
