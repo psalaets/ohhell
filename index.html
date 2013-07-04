@@ -17,6 +17,10 @@
                 position: fixed;
                 top: 60px;
             }
+
+            .trend {
+                border: 1px #CCC solid;
+            }
         </style>
     </head>
     <body>
@@ -166,7 +170,8 @@
                     <td>{{stat.rank | place}}</td>
                     <td>
                         <p>{{stat.player}}</p>
-                        <span ohhell-trend
+                        <span class="trend"
+                              ohhell-trend
                               player-scores="stat.totalScoresPerRound"
                               max-score="{{stats.maxScore}}"
                               min-score="{{stats.minScore}}"></span>
