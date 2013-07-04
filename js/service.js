@@ -82,7 +82,19 @@ angular.module("ohhell.service", ["ohhell.model"]).
     }]).
     factory("summaryService", function() {
         return {
-            //stats: scores, total, player, rank
+            /*
+
+            stats is an array of
+            {
+              scores: array of RoundScore
+              total: number
+              player: string
+              rank: number
+              streak: string,
+              totalScoresPerRound: array of number
+            }
+
+            */
             generateStats: function(game) {
                 var thisService = this;
                 var stats = game.getPlayers().map(function(player) {
@@ -99,6 +111,7 @@ angular.module("ohhell.service", ["ohhell.model"]).
 
                 this.total(stat);
                 this.streak(stat);
+                this.totalScorePerRound(stat);
 
                 return stat;
             },
@@ -157,6 +170,22 @@ angular.module("ohhell.service", ["ohhell.model"]).
                 }
 
                 stat.streak = (mostRecentResult ? "Got " : "Missed ") + count;
+            },
+            //assumes stat has scores
+            totalScorePerRound: function(stat) {
+                var scoredRounds = stat.scores.filter(function(roundScore) {
+                    return roundScore.isReported();
+                });
+
+                var totalScoresPerRound = [];
+                var runningTotal = 0;
+
+                scoredRounds.forEach(function(roundScore) {
+                    runningTotal += roundScore.getPoints();
+                    totalScoresPerRound.push(runningTotal);;
+                });
+
+                stat.totalScoresPerRound = totalScoresPerRound;
             }
         };
     });

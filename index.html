@@ -164,7 +164,10 @@
                 </tr>
                 <tr ng-repeat="stat in stats | orderBy:rank">
                     <td>{{stat.rank | place}}</td>
-                    <td>{{stat.player}}</td>
+                    <td>
+                        <p>{{stat.player}}</p>
+                        <span ohhell-trend player-scores="stat.totalScoresPerRound"></span>
+                    </td>
                     <td>{{stat.total}}</td>
                     <td ng-repeat="score in stat.scores" ng-class="{success: score.gotBid == true, error: score.gotBid == false}">
                         <span ng-show="score.isReported()">{{score.getBid()}}</span>
@@ -176,11 +179,15 @@
             <input class="btn" type="button" value="Done" ng-hide="hasNextRound()" ng-click="done()"/>
         </script>
 
+        <script src="js/vendor/jquery.js"></script>
+        <script src="js/vendor/jquery.sparkline.js"></script>
+
         <script src="js/vendor/angular.js"></script>
         <script src="js/vendor/lostorage.js"></script>
         <script src="js/vendor/vagueTime.js"></script>
 
         <script src="js/model.js"></script>
+        <script src="js/directive.js"></script>
         <script src="js/controller.js"></script>
         <script src="js/service.js"></script>
         <script src="js/filter.js"></script>
