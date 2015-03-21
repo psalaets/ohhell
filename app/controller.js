@@ -1,17 +1,5 @@
 angular.module('ohhell.controller', []).
 
-controller('LandingController', ['$scope', 'navService', 'storageService', function($scope, navService, storageService) {
-    $scope.savedGameCount = storageService.all().length;
-
-    $scope.setup = function() {
-        navService.newGame();
-    };
-
-    $scope.showSavedGames = function() {
-        navService.savedGames();
-    };
-}]).
-
 controller('SetupController', ['$scope', 'navService', 'Game', 'storageService', function($scope, navService, Game, storageService) {
     $scope.maxRound = 8;
     $scope.maxRoundAllowed = 8;
