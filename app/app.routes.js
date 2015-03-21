@@ -5,7 +5,7 @@ angular.module('app').config(function($routeProvider) {
       controller: "LandingController"
     })
     .when("/new", {
-      templateUrl: "setup.html",
+      templateUrl: "setup/setup.html",
       controller: "SetupController"
     })
     .when("/games/:gameTimestamp/rounds/:round", {

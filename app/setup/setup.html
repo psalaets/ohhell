@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="span12">
+        <form>
+            <h1>Play up to...</h1>
+            <select ng-model="maxRound" ng-options="i | withTotalRounds for i in 1 | upto:maxRoundAllowed" class="span3"></select>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <h1>Players</h1>
+
+        <form>
+            <div class="input-append">
+                <input ng-model="playerName" type="text" placeholder="Name" class="span3"/>
+                <button ng-click="addPlayer(playerName)" type="submit" class="btn">Add</button>
+            </div>
+            <span class="help-block">Start with first dealer, go clockwise</span>
+        </form>
+
+        <div class="row">
+            <div class="span4">
+                <table class="table">
+                    <tr ng-repeat="player in players">
+                        <td>
+                            {{player}}
+                            <span class="pull-right">
+                                <input ng-click="removePlayerAtPosition($index)" type="button" class="btn" value="Remove"/>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+
+        <input class="btn btn-success" ng-hide="needMorePlayers" type="button" ng-click="startGame()" value="Start Game"/>
+        <div class="alert alert-error" ng-show="needMorePlayers">
+            <strong>Add more players</strong><br>
+            {{message}}
+        </div>
+    </div>
+</div>

@@ -1,39 +1,5 @@
 angular.module('ohhell.controller', []).
 
-controller('SetupController', ['$scope', 'navService', 'Game', 'storageService', function($scope, navService, Game, storageService) {
-    $scope.maxRound = 8;
-    $scope.maxRoundAllowed = 8;
-    $scope.players = [];
-
-    $scope.addPlayer = function(name) {
-        if(name) {
-            $scope.players.push(name);
-            $scope.playerName = '';
-        }
-    };
-
-    //Remove by array index
-    $scope.removePlayerAtPosition = function(index) {
-        $scope.players.splice(index, 1);
-    };
-
-    $scope.$watch("players.length", function(newValue, oldValue, scope) {
-        if(newValue < 2) {
-            scope.message = "Need at least two players to begin";
-            scope.needMorePlayers = true;
-        } else {
-            scope.message = "";
-            scope.needMorePlayers = false;
-        }
-    });
-
-    $scope.startGame = function() {
-        var game = Game.create($scope.players, $scope.maxRound);
-        storageService.save(game);
-        navService.currentRound(game);
-    };
-}]).
-
 controller('SavedGamesController', ['$scope', 'navService', 'storageService', function($scope, navService, storageService) {
     $scope.savedGames = storageService.all();
 
