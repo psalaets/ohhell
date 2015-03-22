@@ -17,7 +17,7 @@ angular.module('app').config(function($routeProvider) {
       controller: "ScoreboardController"
     })
     .when("/games", {
-      templateUrl: "savedGames.html",
+      templateUrl: "saved-games/saved-games.html",
       controller: "SavedGamesController"
     })
     .otherwise({

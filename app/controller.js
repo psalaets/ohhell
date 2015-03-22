@@ -1,18 +1,5 @@
 angular.module('ohhell.controller', []).
 
-controller('SavedGamesController', ['$scope', 'navService', 'storageService', function($scope, navService, storageService) {
-    $scope.savedGames = storageService.all();
-
-    $scope.resume = function(game) {
-        if(game.roundsLeft()) {
-            navService.currentRound(game);
-        } else {
-            navService.scoreboard(game);
-        }
-
-    }
-}]).
-
 controller('RoundController', ['$scope', '$routeParams', 'navService', 'storageService', function($scope, $routeParams, navService, storageService) {
     var roundId = $routeParams.round;
     var gameTimestamp = $routeParams.gameTimestamp;
