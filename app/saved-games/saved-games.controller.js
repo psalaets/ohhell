@@ -12,5 +12,10 @@
         }
 
     };
+
+    $scope.roundsLeftPluralizations = {
+      '1': '{} round remaining',
+      'other': '{} rounds remaining'
+    };
   }
 })(angular);
