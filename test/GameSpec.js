@@ -1,7 +1,7 @@
 describe("Game", function() {
   var Game;
 
-  beforeEach(module("ohhell.model"));
+  beforeEach(module("app"));
   beforeEach(inject(function(_Game_) {
     Game = _Game_;
   }));

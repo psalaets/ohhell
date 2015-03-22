@@ -1,7 +1,7 @@
 describe("RoundScore", function() {
   var RoundScore;
 
-  beforeEach(module("ohhell.model"));
+  beforeEach(module("app"));
   beforeEach(inject(function(_RoundScore_) {
     RoundScore = _RoundScore_;
   }));

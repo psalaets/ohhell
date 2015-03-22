@@ -1,7 +1,7 @@
 describe("Round", function() {
   var Round;
 
-  beforeEach(module("ohhell.model"));
+  beforeEach(module("app"));
   beforeEach(inject(function(_Round_) {
     Round = _Round_;
   }));
