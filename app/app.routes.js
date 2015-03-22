@@ -9,7 +9,7 @@ angular.module('app').config(function($routeProvider) {
       controller: "SetupController"
     })
     .when("/games/:gameTimestamp/rounds/:round", {
-      templateUrl: "round.html",
+      templateUrl: "round/round.html",
       controller: "RoundController"
     })
     .when("/games/:gameTimestamp", {

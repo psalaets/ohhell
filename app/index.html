@@ -24,51 +24,6 @@
             <div ng-view></div>
         </div>
 
-        <script type="text/ng-template" id="round.html">
-            <div class="row">
-                <div class="span12">
-                    <h1>Round {{round.getName()}}</h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="span6">
-                    <table class="table">
-                        <tr>
-                            <th>Player</th>
-                            <th>Bid</th>
-                            <th><input type="button" class="btn btn-success" value="Everyone Got It" ng-click="everyoneGotIt()"/></th>
-                            <th>Points</th>
-                        </tr>
-                        <tr ng-repeat="score in round.getScores()" ng-class="{success: score.gotBid == true, error: score.gotBid == false}">
-                            <td>{{score.getPlayer()}}</td>
-                            <td>
-                                <select ng-model="score.bid" ng-options="i.toString() for i in 0 | upto:round.getMaxTricks()" class="span1"></select>
-                            </td>
-                            <td>
-                                <input class="btn btn-success" type="button" value="Got It" ng-click="score.madeBid()"/>
-                                <input class="btn btn-danger" type="button" value="Missed It" ng-click="score.missedBid()"/>
-                            </td>
-                            <td>{{score.getPoints() | sign}}</td>
-                        </tr>
-                    </table>
-
-                    <input class="btn" type="button" value="Round Finished" ng-show="round.isFinished()" ng-click="roundFinished()"/>
-                </div>
-                <div class="span3">
-                    <div id="round-details" class="well well-large">
-                        <p>{{round.getDealer()}} is Dealer</p>
-                        <p>
-                            <span ng-pluralize count="round.getMaxTricks()" when="{
-                                '1': '1 Trick Possible',
-                                'other': '{} Tricks Possible'
-                            }"></span>
-                        </p>
-                        <p>{{round.getTotalBids()}} Total Bids</p>
-                    </div>
-                </div>
-            </div>
-        </script>
-
         <script type="text/ng-template" id="scoreboard.html">
             <h1>Scoreboard</h1>
             <table class="table table-bordered">
