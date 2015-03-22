@@ -1,4 +1,4 @@
-angular.module("ohhell.filter", []).
+angular.module("app.filter", []).
     //Puts a +/- on numbers that aren't 0
     filter("sign", function() {
         return function(value) {
@@ -48,13 +48,8 @@ angular.module("ohhell.filter", []).
         };
     }).
     filter('timeAgo', function() {
-        var vtime = vagueTime;
-
         return function(value) {
-            return vtime.get({
-                from: value,
-                units: 'ms'
-            });
+            return 'a while ago';
         };
     }).
     filter('withTotalRounds', function() {
