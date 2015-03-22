@@ -1,0 +1,22 @@
+<h1>Scoreboard</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>Rank</th>
+        <th>Player</th>
+        <th>Total</th>
+        <th ng-repeat="round in rounds">
+            {{round.getName()}}
+        </th>
+    </tr>
+    <tr ng-repeat="stat in stats | orderBy:rank">
+        <td>{{stat.rank | place}}</td>
+        <td>{{stat.player}}</td>
+        <td>{{stat.total}}</td>
+        <td ng-repeat="score in stat.scores" ng-class="{success: score.gotBid == true, error: score.gotBid == false}">
+            <span ng-show="score.isReported()">{{score.getBid()}}</span>
+        </td>
+    </tr>
+</table>
+
+<input class="btn" type="button" value="Next Round" ng-show="hasNextRound()" ng-click="nextRound()"/>
+<input class="btn" type="button" value="Done" ng-hide="hasNextRound()" ng-click="done()"/>
