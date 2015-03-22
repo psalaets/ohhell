@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Oh Hell</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+
         <style type="text/css">
             .table .success {
                 background-color: #DFF0D8;
@@ -24,10 +24,18 @@
             <div ng-view></div>
         </div>
 
-        <script src="model.js"></script>
-        <script src="controller.js"></script>
-        <script src="service.js"></script>
+        <script src="app.module.js"></script>
+        <script src="app.routes.js"></script>
         <script src="filter.js"></script>
-        <script src="app.js"></script>
+        <script src="landing/landing.module.js"></script>
+        <script src="landing/landing.controller.js"></script>
+        <script src="setup/setup.module.js"></script>
+        <script src="setup/setup.controller.js"></script>
+        <script src="round/round.module.js"></script>
+        <script src="round/round.controller.js"></script>
+        <script src="scoreboard/scoreboard.module.js"></script>
+        <script src="scoreboard/scoreboard.controller.js"></script>
+        <script src="saved-games/saved-games.module.js"></script>
+        <script src="saved-games/saved-games.controller.js"></script>
     </body>
 </html>
