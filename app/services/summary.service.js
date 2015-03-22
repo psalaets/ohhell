@@ -18,8 +18,6 @@
         };
 
         this.total(stat);
-        this.streak(stat);
-
         return stat;
       },
       //assumes stats have total
