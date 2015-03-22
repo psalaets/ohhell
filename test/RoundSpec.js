@@ -1,34 +1,39 @@
 describe("Round", function() {
-  beforeEach(module("ohhell.model"));
+  var Round;
 
-  it("is named on creation", inject(function(Round) {
+  beforeEach(module("ohhell.model"));
+  beforeEach(inject(function(_Round_) {
+    Round = _Round_;
+  }));
+
+  it("is named on creation", function() {
     var r = Round.create(1, "round 1", 1, ['bob', 'joe']);
 
     expect(r.getName()).toEqual("round 1");
-  }));
+  });
 
-  it("knows max number of tricks", inject(function(Round) {
+  it("knows max number of tricks", function() {
     var r = Round.create(1, "round", 4, ['bob', 'joe']);
 
     expect(r.getMaxTricks()).toEqual(4);
-  }));
+  });
 
-  it("makes first player the dealer", inject(function(Round) {
+  it("makes first player the dealer", function() {
     var r = Round.create(1, "round", 3, ['bob', 'joe']);
 
     expect(r.getDealer()).toEqual('bob');
-  }));
+  });
 
-  it("has a score for each player", inject(function(Round) {
+  it("has a score for each player", function() {
     var r = Round.create(1, "round", 3, ['bob', 'joe']);
 
     var scores = r.getScores();
 
     expect(scores[0].getPlayer()).toEqual('bob');
     expect(scores[1].getPlayer()).toEqual('joe');
-  }));
+  });
 
-  it("is finished once all scores are reported", inject(function(Round) {
+  it("is finished once all scores are reported", function() {
     var r = Round.create(1, "round", 3, ['bob', 'joe']);
 
     var scores = r.getScores();
@@ -40,23 +45,23 @@ describe("Round", function() {
     scores[1].missedBid();
 
     expect(r.isFinished()).toEqual(true);
-  }));
+  });
 
-  it("can return score for given player", inject(function(Round) {
+  it("can return score for given player", function() {
     var r = Round.create(1, "round", 3, ['bob', 'joe']);
 
     var score = r.getScore('joe');
 
     expect(score.getPlayer()).toEqual('joe');
-  }));
+  });
 
-  it("returns null when finding score for unknown player", inject(function(Round) {
+  it("returns null when finding score for unknown player", function() {
     var r = Round.create(1, "round", 3, ['bob', 'joe']);
 
     expect(r.getScore('tommy')).toBeNull();
-  }));
+  });
 
-  it("knows total bids made", inject(function(Round) {
+  it("knows total bids made", function() {
     var r = Round.create(1, "round", 3, ['bob', 'joe']);
     var scores = r.getScores();
 
@@ -64,9 +69,9 @@ describe("Round", function() {
     scores[1].setBid(1);
 
     expect(r.getTotalBids()).toEqual(3);
-  }));
+  });
 
-  it("can bulk flag all scores as 'Made Bid'", inject(function(Round) {
+  it("can bulk flag all scores as 'Made Bid'", function() {
     var r = Round.create(1, "round", 3, ['bob', 'joe']);
 
     r.allScoresMadeBid();
@@ -74,9 +79,9 @@ describe("Round", function() {
     var scores = r.getScores();
     expect(scores[0].gotBid).toEqual(true);
     expect(scores[1].gotBid).toEqual(true);
-  }));
+  });
 
-  it("can convert to json-ready object", inject(function(Round) {
+  it("can convert to json-ready object", function() {
     var r = Round.create(1, 'round', 3, ['bob', 'joe']);
 
     var json = r.toJson();
@@ -86,9 +91,9 @@ describe("Round", function() {
     expect(json.maxTricks).toEqual(3);
     expect(json.dealer).toEqual('bob');
     expect(json.scores.length).toEqual(2);
-  }));
+  });
 
-  it('can be created with object from json', inject(function(Round) {
+  it('can be created with object from json', function() {
     var json = {
       id: 5,
       name: 'Round',
@@ -112,5 +117,5 @@ describe("Round", function() {
     expect(round.getMaxTricks()).toEqual(6);
     expect(round.dealer).toEqual('bob');
     expect(round.getScores().length).toEqual(2);
-  }));
+  });
 });
