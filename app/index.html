@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <meta charset="utf-8">
+        <title>Oh Hell</title>
+
+        <style type="text/css">
+            .table .success {
+                background-color: #DFF0D8;
+            }
+
+            .table .error {
+                background-color: #F2DEDE;
+            }
+
+            #round-details {
+                position: fixed;
+                top: 60px;
+                right: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div ng-view></div>
+        </div>
+
+        <!-- build:js vendor.js -->
+        <!-- inject-vendor-scripts:js -->
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <!-- endinject -->
+        <!-- endbuild -->
+
+        <!-- build:js app.js -->
+        <!-- inject-app-scripts:js -->
+        <script src="app.module.js"></script>
+        <script src="app.routes.js"></script>
+
+        <script src="models/models.module.js"></script>
+        <script src="models/game.model.js"></script>
+        <script src="models/round.model.js"></script>
+        <script src="models/round-score.model.js"></script>
+
+        <script src="services/services.module.js"></script>
+        <script src="services/games.service.js"></script>
+        <script src="services/nav.service.js"></script>
+        <script src="services/summary.service.js"></script>
+
+        <script src="landing/landing.module.js"></script>
+        <script src="landing/landing.controller.js"></script>
+
+        <script src="setup/setup.module.js"></script>
+        <script src="setup/setup.controller.js"></script>
+        <script src="setup/with-total-rounds.filter.js"></script>
+
+        <script src="round/round.module.js"></script>
+        <script src="round/round.controller.js"></script>
+        <script src="round/sign.filter.js"></script>
+        <script src="round/upto.filter.js"></script>
+
+        <script src="scoreboard/scoreboard.module.js"></script>
+        <script src="scoreboard/scoreboard.controller.js"></script>
+        <script src="scoreboard/place.filter.js"></script>
+
+        <script src="saved-games/saved-games.module.js"></script>
+        <script src="saved-games/saved-games.controller.js"></script>
+        <script src="saved-games/sentence.filter.js"></script>
+        <script src="saved-games/time-ago.filter.js"></script>
+        <!-- endinject -->
+        <!-- endbuild -->
+    </body>
+</html>

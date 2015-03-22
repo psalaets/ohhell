@@ -1,0 +1,17 @@
+<h1>Games in Progress</h1>
+
+<div class="row" ng-show="!savedGames.length">
+    <div class="well span6">
+        No games in progress
+    </div>
+</div>
+<div class="row" ng-repeat="game in savedGames | orderBy:'-startTime'">
+    <div class="well span6">
+        <h4>Started {{game.startTime | timeAgo}}</h4>
+        <p>with {{game.players | sentence}}</p>
+        <p>
+            <span ng-pluralize count="game.roundsLeft()" when="roundsLeftPluralizations"></span>
+            <input class="btn pull-right" type="button" ng-click="resume(game)" value="Resume"/>
+        </p>
+    </div>
+</div>
