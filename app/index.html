@@ -25,9 +25,15 @@
             <div ng-view></div>
         </div>
 
+        <!-- build:js vendor.js -->
+        <!-- inject-vendor-scripts:js -->
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
+        <!-- endinject -->
+        <!-- endbuild -->
 
+        <!-- build:js app.js -->
+        <!-- inject-app-scripts:js -->
         <script src="app.module.js"></script>
         <script src="app.routes.js"></script>
 
@@ -61,5 +67,7 @@
         <script src="saved-games/saved-games.controller.js"></script>
         <script src="saved-games/sentence.filter.js"></script>
         <script src="saved-games/time-ago.filter.js"></script>
+        <!-- endinject -->
+        <!-- endbuild -->
     </body>
 </html>
