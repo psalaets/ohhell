@@ -15,15 +15,32 @@ angular.module('app').config(function($routeProvider) {
     })
     .when("/games/:gameTimestamp/rounds/:round", {
       templateUrl: "round/round.html",
-      controller: "RoundController"
+      controller: "RoundController",
+      resolve: {
+        currentGame: function($route, gamesService) {
+          var gameTimestamp = $route.current.params.gameTimestamp;
+          return gamesService.find(gameTimestamp);
+        }
+      }
     })
     .when("/games/:gameTimestamp", {
       templateUrl: "scoreboard/scoreboard.html",
-      controller: "ScoreboardController"
+      controller: "ScoreboardController",
+      resolve: {
+        currentGame: function($route, gamesService) {
+          var gameTimestamp = $route.current.params.gameTimestamp;
+          return gamesService.find(gameTimestamp);
+        }
+      }
     })
     .when("/games", {
       templateUrl: "saved-games/saved-games.html",
-      controller: "SavedGamesController"
+      controller: "SavedGamesController",
+      resolve: {
+        allGames: function(gamesService) {
+          return gamesService.all();
+        }
+      }
     })
     .otherwise({
       redirectTo: "/"
