@@ -30,8 +30,10 @@
 
     $scope.startGame = function() {
       var game = Game.create($scope.players, $scope.maxRound);
-      gamesService.save(game);
-      navService.currentRound(game);
+
+      gamesService.save(game).then(function(game) {
+        navService.currentRound(game);
+      });
     };
   }
 })(angular);

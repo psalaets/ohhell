@@ -2,7 +2,9 @@
   angular.module('app.saved-games').controller('SavedGamesController', SavedGamesController);
 
   function SavedGamesController($scope, navService, gamesService) {
-    $scope.savedGames = gamesService.all();
+    gamesService.all().then(function(games) {
+      $scope.savedGames = games;
+    });
 
     $scope.resume = function(game) {
         if(game.roundsLeft()) {

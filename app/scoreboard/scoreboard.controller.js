@@ -4,22 +4,27 @@
   function ScoreboardController($scope, $routeParams, navService, summaryService, gamesService) {
     var gameTimestamp = $routeParams.gameTimestamp;
 
-    var game = gamesService.find(gameTimestamp);
+    var currentGame;
 
-    $scope.rounds = game.getRounds();
-    $scope.stats = summaryService.generateStats(game);
+    gamesService.find(gameTimestamp).then(function(game) {
+      currentGame = game;
 
-    $scope.hasNextRound = function() {
-      return game.roundsLeft();
-    };
+      $scope.rounds = game.getRounds();
+      $scope.stats = summaryService.generateStats(game);
+
+      $scope.hasNextRound = function() {
+        return currentGame.roundsLeft();
+      };
+    });
 
     $scope.nextRound = function() {
-      navService.currentRound(game);
+      navService.currentRound(currentGame);
     };
 
     $scope.done = function() {
-      gamesService.remove(game);
-      navService.landingPage();
+      gamesService.remove(currentGame).then(function() {
+        navService.landingPage();
+      });
     };
   }
 })(angular);

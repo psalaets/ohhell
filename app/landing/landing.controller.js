@@ -2,7 +2,9 @@
   angular.module('app.landing').controller('LandingController', LandingController);
 
   function LandingController($scope, navService, gamesService) {
-    $scope.savedGameCount = gamesService.all().length;
+    gamesService.count().then(function(count) {
+      $scope.savedGameCount = count;
+    });
 
     $scope.setup = function() {
       navService.newGame();
