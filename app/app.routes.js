@@ -2,7 +2,12 @@ angular.module('app').config(function($routeProvider) {
   $routeProvider
     .when("/", {
       templateUrl: "landing/landing.html",
-      controller: "LandingController"
+      controller: "LandingController",
+      resolve: {
+        gameCount: function(gamesService) {
+          return gamesService.count();
+        }
+      }
     })
     .when("/new", {
       templateUrl: "setup/setup.html",
