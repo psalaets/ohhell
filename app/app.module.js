@@ -1,5 +1,8 @@
 angular.module('app', [
+  // routing
   'ngRoute',
+  // fastclick-like support
+  'ngTouch',
   'app.models',
   'app.services',
   'app.landing',
